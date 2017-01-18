@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E9D1E326A85BA97502649BD54117EF94'
-               BlueprintName = 'Underscore.m'
+               BlueprintIdentifier = 'E3A308A7A78FD1C720C0CA8EA4C96625'
+               BlueprintName = 'AFMInfoBanner'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libUnderscore.m.a'>
+               BuildableName = 'libAFMInfoBanner.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -11,6 +11,7 @@ target 'Carnegie' do
   pod 'Underscore.m'
   pod 'CocoaLumberjack'
   pod 'FontAwesomeKit', '~> 2.2.0'
+  pod 'AFMInfoBanner'
    
   target 'CarnegieTests' do
     inherit! :search_paths

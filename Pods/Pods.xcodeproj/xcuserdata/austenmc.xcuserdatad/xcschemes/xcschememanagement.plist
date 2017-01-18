@@ -4,7 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFMInfoBanner.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>CVKHierarchySearcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -67,12 +77,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5F0192AFE9755E71401C73577DF1B188</key>
+		<key>2E7E377C56525B192BE7B670D222B3E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>85792EA5975075AA5621B991221289F3</key>
+		<key>5E6CD5742E67ED3FB4E370C61220111B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5F0192AFE9755E71401C73577DF1B188</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,7 +102,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E92B9F564B9BDB8A5C1A031D460A8066</key>
+		<key>E3A308A7A78FD1C720C0CA8EA4C96625</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9D1E326A85BA97502649BD54117EF94</key>
 		<dict>
 			<key>primary</key>
 			<true/>

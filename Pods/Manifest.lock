@@ -1,4 +1,6 @@
 PODS:
+  - AFMInfoBanner (1.2.1):
+    - CVKHierarchySearcher (~> 0.2)
   - Bolts/Tasks (1.8.4)
   - CocoaLumberjack (3.0.0):
     - CocoaLumberjack/Default (= 3.0.0)
@@ -8,6 +10,7 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (3.0.0):
     - CocoaLumberjack/Default
+  - CVKHierarchySearcher (0.2.0)
   - FontAwesomeKit (2.2.0):
     - FontAwesomeKit/Core (= 2.2.0)
     - FontAwesomeKit/FontAwesome (= 2.2.0)
@@ -31,6 +34,7 @@ PODS:
   - Underscore.m (0.3.0)
 
 DEPENDENCIES:
+  - AFMInfoBanner
   - CocoaLumberjack
   - FontAwesomeKit (~> 2.2.0)
   - Parse
@@ -38,13 +42,15 @@ DEPENDENCIES:
   - Underscore.m
 
 SPEC CHECKSUMS:
+  AFMInfoBanner: a7bcfd409faa624f043e604ae4fb789c84b22815
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
+  CVKHierarchySearcher: 7be8d3bcbcc6f86ff07f785e6c632b5e40da2553
   FontAwesomeKit: 025fd4dd1017fe4e3f8d47b03e024deedbb33cd4
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   Underscore.m: dc9ca06fe2c9a79d01ce20c3d2c1e8f91f2d92dc
 
-PODFILE CHECKSUM: 378e8b98f3789cd8888c8ec426e97fa98c0dbc0e
+PODFILE CHECKSUM: 8e11303da38430bd6b99d931cfa983a60da3df03
 
 COCOAPODS: 1.1.1

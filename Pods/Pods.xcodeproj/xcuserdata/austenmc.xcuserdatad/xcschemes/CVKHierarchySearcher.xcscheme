@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E9D1E326A85BA97502649BD54117EF94'
-               BlueprintName = 'Underscore.m'
+               BlueprintIdentifier = '5E6CD5742E67ED3FB4E370C61220111B'
+               BlueprintName = 'CVKHierarchySearcher'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libUnderscore.m.a'>
+               BuildableName = 'libCVKHierarchySearcher.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
