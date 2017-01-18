@@ -1,0 +1,17 @@
+//
+//  Carnegie.pch
+//  Carnegie
+//
+//  Created by Austen McDonald on 1/17/17.
+//  Copyright © 2017 Overlord. All rights reserved.
+//
+
+#ifndef Carnegie_h
+#define Carnegie_h
+
+#define LOG_LEVEL_DEF ddLogLevel
+#import <CocoaLumberjack/CocoaLumberjack.h>
+
+static const DDLogLevel ddLogLevel = DDLogLevelDebug;
+
+#endif /* Carnegie_h */
