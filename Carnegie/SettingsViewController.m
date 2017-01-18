@@ -59,6 +59,13 @@ NS_ENUM(NSInteger) {
   [super viewDidLoad];
 
   self.title = @"Settings";
+
+  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(_handleDone)];
+}
+
+- (void)_handleDone
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
