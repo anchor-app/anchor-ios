@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 
+#import <AFMInfoBanner/AFMInfoBanner.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
@@ -201,6 +202,8 @@ NS_ENUM(NSInteger) {
     {
       if (PFUser.currentUser) {
         [PFUser logOut];
+
+        [AFMInfoBanner showAndHideWithText:@"Successfully logged out" style:AFMInfoBannerStyleInfo];
         [self.tableView reloadData];
       } else {
         PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
@@ -223,6 +226,8 @@ NS_ENUM(NSInteger) {
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
   [logInController dismissViewControllerAnimated:YES completion:nil];
+
+  [AFMInfoBanner showAndHideWithText:@"Successfully logged in" style:AFMInfoBannerStyleInfo];
   [self.tableView reloadData];
 }
 
