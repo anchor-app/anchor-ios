@@ -40,11 +40,11 @@ NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
 
   // Set up logging.
   [DDLog addLogger:[DDTTYLogger sharedInstance]];
-  DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
-  fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-  fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+  self.fileLogger = [[DDFileLogger alloc] init];
+  self.fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+  self.fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
 
-  [DDLog addLogger:fileLogger];
+  [DDLog addLogger:self.fileLogger];
 
   _calendarManager = [[CNGECalendarManager alloc] init];
 

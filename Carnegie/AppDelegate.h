@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class DDFileLogger;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) DDFileLogger *fileLogger;
 
 @end
 

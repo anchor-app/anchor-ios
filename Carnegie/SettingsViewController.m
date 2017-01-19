@@ -11,6 +11,9 @@
 #import <AFMInfoBanner/AFMInfoBanner.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import <MessageUI/MessageUI.h>
+
+#import "AppDelegate.h"
 
 NS_ENUM(NSInteger) {
   SectionLogin,
@@ -220,6 +223,56 @@ NS_ENUM(NSInteger) {
 //      }];
       break;
     }
+      case SectionLogs:
+    {
+      switch (indexPath.row) {
+          case RowLogsView:
+          break;
+          case RowLogsEmail:
+        {
+          [self _emailLogs];
+        }
+      }
+    }
+  }
+}
+
+- (NSMutableArray *)_logData
+{
+  NSMutableArray *logFiles = [NSMutableArray array];
+
+  // TODO: invert this dependency w/ some kind of provider map solution.
+  AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+  DDFileLogger *logger = appDelegate.fileLogger;
+  NSArray *sortedLogFileInfos = [logger.logFileManager sortedLogFileInfos];
+  for (DDLogFileInfo *info in sortedLogFileInfos) {
+    NSData *fileData = [NSData dataWithContentsOfFile:info.filePath];
+    [logFiles addObject:fileData];
+  }
+  return logFiles;
+}
+
+- (void)_emailLogs
+{
+  if ([MFMailComposeViewController canSendMail]) {
+    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+    [mailViewController setSubject:@"Carnegie Log Data" ];
+
+    NSMutableData *allLogData = _.array([self _logData]).reduce([NSMutableData data], ^id (NSMutableData *memo, NSData *file) {
+      [memo appendData:file];
+      return memo;
+    });
+    [mailViewController addAttachmentData:allLogData mimeType:@"text/plain" fileName:@"logs.txt"];
+
+    [self presentViewController:mailViewController animated:YES completion:nil];
+  } else {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"Looks like email is not set up on this device." preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
   }
 }
 
