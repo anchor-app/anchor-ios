@@ -14,4 +14,7 @@
 
 static const DDLogLevel ddLogLevel = DDLogLevelDebug;
 
+#import <Underscore.m/Underscore.h>
+#define _ Underscore
+
 #endif /* Carnegie_h */
