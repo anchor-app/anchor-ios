@@ -11,6 +11,7 @@
 #import <AFMInfoBanner/AFMInfoBanner.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import <LSLogViewer/LSLogViewer.h>
 #import <MessageUI/MessageUI.h>
 
 #import "AppDelegate.h"
@@ -227,10 +228,14 @@ NS_ENUM(NSInteger) {
     {
       switch (indexPath.row) {
           case RowLogsView:
+        {
+          [LSLogViewer showViewer];
           break;
+        }
           case RowLogsEmail:
         {
           [self _emailLogs];
+          break;
         }
       }
     }

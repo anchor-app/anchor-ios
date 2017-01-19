@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E9D1E326A85BA97502649BD54117EF94'
+               BlueprintIdentifier = '6B64449ABDC3F59F1A4F924A2743FBB7'
                BlueprintName = 'Underscore.m'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libUnderscore.m.a'>

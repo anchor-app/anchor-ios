@@ -26,6 +26,7 @@ PODS:
     - FontAwesomeKit/Core
   - FontAwesomeKit/Zocial (2.2.0):
     - FontAwesomeKit/Core
+  - LSLogViewer (1.0)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
   - ParseUI (1.2.0):
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - AFMInfoBanner
   - CocoaLumberjack
   - FontAwesomeKit (~> 2.2.0)
+  - LSLogViewer
   - Parse
   - ParseUI
   - Underscore.m
@@ -47,10 +49,11 @@ SPEC CHECKSUMS:
   CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
   CVKHierarchySearcher: 7be8d3bcbcc6f86ff07f785e6c632b5e40da2553
   FontAwesomeKit: 025fd4dd1017fe4e3f8d47b03e024deedbb33cd4
+  LSLogViewer: 10fd49c76177c408049a84b5467ef30bd2e422ea
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   Underscore.m: dc9ca06fe2c9a79d01ce20c3d2c1e8f91f2d92dc
 
-PODFILE CHECKSUM: 8e11303da38430bd6b99d931cfa983a60da3df03
+PODFILE CHECKSUM: 0ee0de0abd9a120e0bd72c7242e63dee563b10cf
 
 COCOAPODS: 1.1.1
