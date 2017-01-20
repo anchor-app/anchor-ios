@@ -1,0 +1,20 @@
+//
+//  Anchor.pch
+//  Anchor
+//
+//  Created by Austen McDonald on 1/17/17.
+//  Copyright © 2017 Overlord. All rights reserved.
+//
+
+#ifndef Anchor_h
+#define Anchor_h
+
+#define LOG_LEVEL_DEF ddLogLevel
+#import <CocoaLumberjack/CocoaLumberjack.h>
+
+static const DDLogLevel ddLogLevel = DDLogLevelDebug;
+
+#import <Underscore.m/Underscore.h>
+#define _ Underscore
+
+#endif /* Anchor_h */

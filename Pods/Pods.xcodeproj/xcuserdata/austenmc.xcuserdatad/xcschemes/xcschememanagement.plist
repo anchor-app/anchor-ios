@@ -44,17 +44,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Carnegie.xcscheme</key>
+		<key>Pods-Anchor.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CarnegieTests.xcscheme</key>
+		<key>Pods-AnchorTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CarnegieUITests.xcscheme</key>
+		<key>Pods-AnchorUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -77,7 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>25A9E204015C685E3F2E76F0E89993DD</key>
+		<key>346EFCEA247D94505CA06A9D3D4E7EC2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>55A4C93482C11A7874A059F5A2626B11</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,12 +97,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6B64449ABDC3F59F1A4F924A2743FBB7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7080CEE572A03E922A44468F9A543D2F</key>
+		<key>6366B42853FA5DC9FE725490427C977B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +122,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FD5A8D9424AD28BF828AC6F451ED47F2</key>
+		<key>E48EF18F54D93FCDAE8D81D5501D1B77</key>
 		<dict>
 			<key>primary</key>
 			<true/>

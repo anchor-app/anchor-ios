@@ -1,11 +1,11 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'Carnegie' do
+target 'Anchor' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
 
-  # Pods for Carnegie
+  # Pods for Anchor
   pod 'Parse'
   pod 'ParseUI'
   pod 'Underscore.m'
@@ -14,12 +14,12 @@ target 'Carnegie' do
   pod 'AFMInfoBanner'
   pod 'LSLogViewer'
    
-  target 'CarnegieTests' do
+  target 'AnchorTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'CarnegieUITests' do
+  target 'AnchorUITests' do
     inherit! :search_paths
     # Pods for testing
   end
