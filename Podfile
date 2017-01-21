@@ -13,6 +13,7 @@ target 'Anchor' do
   pod 'FontAwesomeKit', '~> 2.2.0'
   pod 'AFMInfoBanner'
   pod 'LSLogViewer'
+  pod 'AFNetworking'
    
   target 'AnchorTests' do
     inherit! :search_paths
