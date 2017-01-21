@@ -16,6 +16,18 @@
 @interface ARUser : PFUser
 
 /**
+ Client identifier provided by the FullContact app registration process. Every user should either have their
+ own API ID/Secret pair or share one for one organization.
+ */
+@property (nonatomic, copy) NSString *fullContactClientId;
+
+/**
+ Secret string provided by the FullContact app registration process. Every user should either have their
+ own API ID/Secret pair or share one for one organization.
+ */
+@property (nonatomic, copy) NSString *fullContactClientSecret;
+
+/**
  Primary access token to perform API requests on FullContact. See https://api.fullcontact.com/v3/docs/authentication/
  */
 @property (nonatomic, copy) NSString *fullContactAccessToken;

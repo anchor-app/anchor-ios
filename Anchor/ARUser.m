@@ -10,6 +10,8 @@
 
 @implementation ARUser
 
+@dynamic fullContactClientId;
+@dynamic fullContactClientSecret;
 @dynamic fullContactResetToken;
 @dynamic fullContactAccessToken;
 
