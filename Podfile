@@ -14,6 +14,7 @@ target 'Anchor' do
   pod 'AFMInfoBanner'
   pod 'LSLogViewer'
   pod 'AFNetworking'
+  pod 'NSURL+QueryDictionary'
    
   target 'AnchorTests' do
     inherit! :search_paths

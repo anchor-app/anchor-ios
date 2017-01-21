@@ -20,6 +20,7 @@
 		0AAC39B41E2C908200065DFD /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39B31E2C908200065DFD /* Schedule.m */; };
 		0AAC39B91E2ECC2100065DFD /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39B81E2ECC2100065DFD /* SettingsViewController.m */; };
 		0ABFFAD41E3314F500EF98F0 /* ARUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABFFAD31E3314F500EF98F0 /* ARUser.m */; };
+		0ABFFAD81E33176500EF98F0 /* ARFullContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABFFAD71E33176500EF98F0 /* ARFullContact.m */; };
 		3573ECB7A4DAC108457C2106 /* libPods-Anchor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15DCA2252DEE97E6655B8BD7 /* libPods-Anchor.a */; };
 		C43F8601FD5E3530F00E5A19 /* libPods-AnchorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDD9B17758A4F0EFBDDFF95F /* libPods-AnchorTests.a */; };
 		ED5F65AE934C60B871CB25F7 /* libPods-AnchorUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E96D1B1EF2DFB40C7462D361 /* libPods-AnchorUITests.a */; };
@@ -73,6 +74,8 @@
 		0AAC39B81E2ECC2100065DFD /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0ABFFAD21E3314F500EF98F0 /* ARUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARUser.h; sourceTree = "<group>"; };
 		0ABFFAD31E3314F500EF98F0 /* ARUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARUser.m; sourceTree = "<group>"; };
+		0ABFFAD61E33176500EF98F0 /* ARFullContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFullContact.h; sourceTree = "<group>"; };
+		0ABFFAD71E33176500EF98F0 /* ARFullContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFullContact.m; sourceTree = "<group>"; };
 		15DCA2252DEE97E6655B8BD7 /* libPods-Anchor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Anchor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35F42672F242161C0757CA69 /* Pods-Anchor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anchor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Anchor/Pods-Anchor.debug.xcconfig"; sourceTree = "<group>"; };
 		4325CFC0E4C8BBCCA9826994 /* Pods-Anchor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anchor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Anchor/Pods-Anchor.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 		0A2CA0F61E24026D00A583A3 /* Anchor */ = {
 			isa = PBXGroup;
 			children = (
+				0ABFFAD51E33174D00EF98F0 /* FullContact */,
 				0AAC39B51E2E9FB500065DFD /* Controllers */,
 				0AAC39AE1E25512D00065DFD /* Models */,
 				0A45D94C1E24035F006E4103 /* Anchor.entitlements */,
@@ -212,6 +216,15 @@
 				0AAC39B81E2ECC2100065DFD /* SettingsViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		0ABFFAD51E33174D00EF98F0 /* FullContact */ = {
+			isa = PBXGroup;
+			children = (
+				0ABFFAD61E33176500EF98F0 /* ARFullContact.h */,
+				0ABFFAD71E33176500EF98F0 /* ARFullContact.m */,
+			);
+			name = FullContact;
 			sourceTree = "<group>";
 		};
 		29D4AB4EFA932207C4B1C8CE /* Pods */ = {
@@ -298,8 +311,9 @@
 		0A2CA0EC1E24026D00A583A3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = AR;
 				LastUpgradeCheck = 0820;
-				ORGANIZATIONNAME = Overlord;
+				ORGANIZATIONNAME = "Roger Huffstetler";
 				TargetAttributes = {
 					0A2CA0F31E24026D00A583A3 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -514,6 +528,7 @@
 			files = (
 				0AAC39AA1E2550CE00065DFD /* Event.m in Sources */,
 				0A2CA0FF1E24026D00A583A3 /* ScheduleViewController.m in Sources */,
+				0ABFFAD81E33176500EF98F0 /* ARFullContact.m in Sources */,
 				0AAC39B41E2C908200065DFD /* Schedule.m in Sources */,
 				0AAC39B91E2ECC2100065DFD /* SettingsViewController.m in Sources */,
 				0A2CA0FC1E24026D00A583A3 /* AppDelegate.m in Sources */,

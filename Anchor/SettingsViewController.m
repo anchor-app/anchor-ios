@@ -15,6 +15,8 @@
 #import <MessageUI/MessageUI.h>
 
 #import "AppDelegate.h"
+#import "ARUser.h"
+#import "ARFullContact.h"
 
 NS_ENUM(NSInteger) {
   SectionLogin,
@@ -218,10 +220,43 @@ NS_ENUM(NSInteger) {
     }
       case SectionFullContact:
     {
-//      AMFullContact *fullContact = [[AMFullContact alloc] initWithClientId:clientId clientSecret:clientSecret redirectURI:redirect];
-//      [fullContact authenticateWithCompletion:^(NSString *accessToken, NSString *refreshToken, NSError *error) {
-//
-//      }];
+      [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+      
+      switch (indexPath.row) {
+        case RowFullContactAuth:
+        {
+          ARUser *user = (ARUser *)[PFUser currentUser];
+          [user fetch];
+
+          if (!user.fullContactClientId || !user.fullContactClientSecret) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"You don't have a FullContact application client ID and/or secret attached to your Anchor user." preferredStyle:UIAlertControllerStyleAlert];
+
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {}];
+
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+
+            break;
+          }
+          // TODO: invert this dependency w/ some kind of provider map solution.
+          AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+          [appDelegate.fullContact authenticateWithScope:@"contacts.read" completion:^(NSString *accessToken, NSString *refreshToken, NSError *error) {
+            if (error) {
+              DDLogError(@"Error authenticating with FullContact: %@", error);
+              [AFMInfoBanner showAndHideWithText:@"Error authenticating with FullContact" style:AFMInfoBannerStyleError];
+            } else {
+              user.fullContactAccessToken = accessToken;
+              user.fullContactResetToken = refreshToken;
+              [user saveEventually];
+
+              DDLogInfo(@"Successfully acquired FullContact accessToken(%@) refreshToken(%@)", accessToken, refreshToken);
+              [AFMInfoBanner showAndHideWithText:@"Authenticated with FullContact" style:AFMInfoBannerStyleInfo];
+            }
+          }];
+          break;
+        }
+      }
       break;
     }
       case SectionLogs:
