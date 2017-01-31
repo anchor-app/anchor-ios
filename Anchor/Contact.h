@@ -14,7 +14,9 @@
 @interface Contact : PFObject<PFSubclassing>
 
 @property (nonatomic, readonly, copy) NSString *fullName;
-@property (nonatomic, readonly, strong) NSArray<NSString *> *emails;
+@property (nonatomic, readonly, copy) NSArray<NSString *> *emails;
+@property (nonatomic, readonly, copy) NSString *fullContactJSON;
+@property (nonatomic, readonly, copy) NSString *photoURL;
 
 + (instancetype)contactWithFullName:(NSString *)fullName emails:(NSArray<NSString *> *)emails;
 

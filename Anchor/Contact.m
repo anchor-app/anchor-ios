@@ -11,7 +11,9 @@
 @interface Contact ()
 
 @property (nonatomic, copy) NSString *fullName;
-@property (nonatomic, strong) NSArray<NSString *> *emails;
+@property (nonatomic, copy) NSArray<NSString *> *emails;
+@property (nonatomic, copy) NSString *fullContactJSON;
+@property (nonatomic, copy) NSString *photoURL;
 
 @end
 
@@ -19,6 +21,8 @@
 
 @dynamic fullName;
 @dynamic emails;
+@dynamic fullContactJSON;
+@dynamic photoURL;
 
 + (instancetype)contactWithFullName:(NSString *)fullName emails:(NSArray<NSString *> *)emails
 {
