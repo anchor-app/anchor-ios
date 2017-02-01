@@ -13,6 +13,7 @@
 		0A2CA1041E24026D00A583A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2CA1031E24026D00A583A3 /* Assets.xcassets */; };
 		0A2CA1121E24026D00A583A3 /* AnchorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2CA1111E24026D00A583A3 /* AnchorTests.m */; };
 		0A2CA11D1E24026D00A583A3 /* AnchorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2CA11C1E24026D00A583A3 /* AnchorUITests.m */; };
+		0A52FF6A1E42886900188E59 /* ARNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF691E42886900188E59 /* ARNote.m */; };
 		0AAC39A41E246DC900065DFD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AAC39A31E246DC900065DFD /* Default-568h@2x.png */; };
 		0AAC39A71E24727400065DFD /* CNGECalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A61E24727400065DFD /* CNGECalendarManager.m */; };
 		0AAC39AA1E2550CE00065DFD /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A91E2550CE00065DFD /* Event.m */; };
@@ -60,6 +61,8 @@
 		0A2CA11C1E24026D00A583A3 /* AnchorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AnchorUITests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0A2CA11E1E24026D00A583A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A45D94C1E24035F006E4103 /* Anchor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Anchor.entitlements; sourceTree = "<group>"; };
+		0A52FF681E42886900188E59 /* ARNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARNote.h; sourceTree = "<group>"; };
+		0A52FF691E42886900188E59 /* ARNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARNote.m; sourceTree = "<group>"; };
 		0AAC39A31E246DC900065DFD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0AAC39A51E24727400065DFD /* CNGECalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CNGECalendarManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0AAC39A61E24727400065DFD /* CNGECalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CNGECalendarManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -195,6 +198,8 @@
 		0AAC39AE1E25512D00065DFD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0A52FF681E42886900188E59 /* ARNote.h */,
+				0A52FF691E42886900188E59 /* ARNote.m */,
 				0AAC39A81E2550CE00065DFD /* Event.h */,
 				0AAC39A91E2550CE00065DFD /* Event.m */,
 				0AAC39AB1E25512800065DFD /* Contact.h */,
@@ -533,6 +538,7 @@
 				0AAC39B91E2ECC2100065DFD /* SettingsViewController.m in Sources */,
 				0A2CA0FC1E24026D00A583A3 /* AppDelegate.m in Sources */,
 				0AAC39A71E24727400065DFD /* CNGECalendarManager.m in Sources */,
+				0A52FF6A1E42886900188E59 /* ARNote.m in Sources */,
 				0AAC39AD1E25512800065DFD /* Contact.m in Sources */,
 				0ABFFAD41E3314F500EF98F0 /* ARUser.m in Sources */,
 				0A2CA0F91E24026D00A583A3 /* main.m in Sources */,
