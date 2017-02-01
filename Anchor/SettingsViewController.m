@@ -274,7 +274,13 @@ NS_ENUM(NSInteger) {
         }
       }
     }
+    case SectionCache:
+    {
+      [self _clearCache];
+    }
   }
+
+  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSMutableArray *)_logData
@@ -322,6 +328,14 @@ NS_ENUM(NSInteger) {
 
   [AFMInfoBanner showAndHideWithText:@"Successfully logged in" style:AFMInfoBannerStyleInfo];
   [self.tableView reloadData];
+}
+
+- (void)_clearCache
+{
+  [PFQuery clearAllCachedResults];
+
+  [AFMInfoBanner showAndHideWithText:@"Cleared Local Caches" style:AFMInfoBannerStyleInfo];
+  DDLogInfo(@"Cleared local caches");
 }
 
 @end
