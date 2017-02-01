@@ -131,7 +131,7 @@
 
   // Find the Contact objects for all participants if they exists.
   PFQuery *queryByEmails = [PFQuery queryWithClassName:NSStringFromClass([Contact class])];
-  queryByEmails.cachePolicy = kPFCachePolicyCacheElseNetwork;
+  //queryByEmails.cachePolicy = kPFCachePolicyCacheElseNetwork;
   [queryByEmails whereKey:@"emails" containedIn:emails];
   [[queryByEmails findObjectsInBackground]
      continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {

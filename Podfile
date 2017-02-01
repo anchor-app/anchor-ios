@@ -15,6 +15,7 @@ target 'Anchor' do
   pod 'LSLogViewer'
   pod 'AFNetworking'
   pod 'NSURL+QueryDictionary'
+  pod 'SDWebImage', '~>3.8'
    
   target 'AnchorTests' do
     inherit! :search_paths

@@ -10,6 +10,7 @@
 
 #import <FontAwesomeKit/FontAwesomeKit.h>
 
+#import "ARContactDetailViewController.h"
 #import "Contact.h"
 #import "Event.h"
 #import "Schedule.h"
@@ -18,6 +19,7 @@
 
 @interface ScheduleViewController () <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) CNGECalendarManager *calendarManager;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) Schedule *schedule;
 @property (nonatomic, strong) NSDate *date;
@@ -32,24 +34,11 @@
 {
   if (self = [super init]) {
     self.date = date;
+    self.calendarManager = calendarManager;
 
     self.startTimeFormatter = [[NSDateFormatter alloc] init];
     [self.startTimeFormatter setDateStyle:NSDateFormatterNoStyle];
     [self.startTimeFormatter setTimeStyle:NSDateFormatterShortStyle];
-
-    // Kick off request to fetch schedule.
-    [[calendarManager asyncFetchScheduleWithDate:self.date] continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {
-      if (t.error) {
-        DDLogError(@"Loading schedule for date %@ failed: %@", date, t.error);
-        return nil;
-      }
-      self.schedule = t.result;
-
-      DDLogInfo(@"Loading schedule for date %@ succeeded: events(%lu) contacts(%lu)", date, self.schedule.events.count, (unsigned long)self.schedule.contacts.count);
-
-      [self.tableView reloadData];
-      return nil;
-    }];
   }
   return self;
 }
@@ -72,6 +61,21 @@
   UIImage *settingsImage = [settingsIcon imageWithSize:CGSizeMake(25, 25)];
   UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:settingsImage style:UIBarButtonItemStylePlain target:self action:@selector(_handleSettings)];
   self.navigationItem.leftBarButtonItem = settingsButton;
+
+  // Kick off request to fetch schedule.
+  [[self.calendarManager asyncFetchScheduleWithDate:self.date] continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {
+    if (t.error) {
+      DDLogError(@"Loading schedule for date %@ failed: %@", self.date, t.error);
+      return nil;
+    }
+    DDLogInfo(@"Loaded schedule for date %@: events(%lu) contacts(%lu)", self.date, self.schedule.events.count, (unsigned long)self.schedule.contacts.count);
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+      self.schedule = t.result;
+      [self.tableView reloadData];
+    });
+    return nil;
+  }];
 }
 
 - (void)_handleSettings
@@ -128,6 +132,18 @@
                      (long)(duration / 60),
                      e.underlyingEvent.title];
   return title;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  Event *event = [_schedule.events objectAtIndex:indexPath.section];
+  id contactOrNull = [event contactOrNullAtIndex:indexPath.row];
+
+  if (![contactOrNull isEqual:[NSNull null]]) {
+    Contact *contact = (Contact *)contactOrNull;
+    ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:contact];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 }
 
 @end
