@@ -23,6 +23,8 @@
 @dynamic emails;
 @dynamic fullContactJSON;
 @dynamic photoURL;
+@synthesize notes = _notes;
+@synthesize annotations = _annotations;
 
 + (instancetype)contactWithFullName:(NSString *)fullName emails:(NSArray<NSString *> *)emails
 {
@@ -39,6 +41,32 @@
 + (NSString *)parseClassName
 {
   return @"Contact";
+}
+
+- (PFRelation *)annotations
+{
+  if (_annotations == nil) {
+    _annotations = [self relationForKey:@"annotations"];
+  }
+  return _annotations;
+}
+
+- (void)setAnnotations:(PFRelation *)annotations
+{
+  _annotations = annotations;
+}
+
+- (PFRelation *)notes
+{
+  if (_notes == nil) {
+    _notes = [self relationForKey:@"notes"];
+  }
+  return _notes;
+}
+
+- (void)setNotes:(PFRelation *)notes
+{
+  _notes = notes;
 }
 
 @end

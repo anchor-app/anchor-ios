@@ -11,12 +11,16 @@
 #import <EventKit/EventKit.h>
 #import <Parse/Parse.h>
 
+@class PFRelation;
+
 @interface Contact : PFObject<PFSubclassing>
 
 @property (nonatomic, readonly, copy) NSString *fullName;
 @property (nonatomic, readonly, copy) NSArray<NSString *> *emails;
 @property (nonatomic, readonly, copy) NSString *fullContactJSON;
 @property (nonatomic, readonly, copy) NSString *photoURL;
+@property (nonatomic, strong) PFRelation *notes;
+@property (nonatomic, strong) PFRelation *annotations;
 
 + (instancetype)contactWithFullName:(NSString *)fullName emails:(NSArray<NSString *> *)emails;
 
