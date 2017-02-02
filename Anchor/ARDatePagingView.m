@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) UIButton *leftButton;
 @property (nonatomic, strong) UIButton *rightButton;
-@property (nonatomic, strong) UITextView *label;
+@property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) NSDateFormatter *timeFormatter;
 
 @end
@@ -50,7 +50,7 @@
     [_rightButton addTarget:self action:@selector(_onButton:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_rightButton];
 
-    self.label = [[UITextView alloc] initWithFrame:CGRectZero];
+    self.label = [[UILabel alloc] initWithFrame:CGRectZero];
     _label.text = [_timeFormatter stringFromDate:_date];
     [self addSubview:_label];
   }
