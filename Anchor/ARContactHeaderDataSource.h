@@ -10,10 +10,10 @@
 
 #import "ARSingleSectionDataSource.h"
 
-@class Contact;
+@class ARContact;
 
 @interface ARContactHeaderDataSource : ARSingleSectionDataSource
 
-- (instancetype)initWithContact:(Contact *)contact;
+- (instancetype)initWithContact:(ARContact *)contact;
 
 @end

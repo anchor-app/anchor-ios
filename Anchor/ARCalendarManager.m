@@ -11,7 +11,7 @@
 #import <Bolts/Bolts.h>
 #import <EventKit/EventKit.h>
 
-#import "Contact.h"
+#import "ARContact.h"
 #import "AREvent.h"
 #import "Schedule.h"
 
@@ -91,11 +91,11 @@
   return index;
 }
 
-- (NSDictionary<NSString *, Contact *> *)_indexForContacts:(NSArray<Contact *> *)contacts
+- (NSDictionary<NSString *, ARContact *> *)_indexForContacts:(NSArray<ARContact *> *)contacts
 {
   NSMutableDictionary *index = [NSMutableDictionary dictionary];
 
-  for (Contact *contact in contacts) {
+  for (ARContact *contact in contacts) {
     for (NSString *email in contact.emails) {
       index[email] = contact;
     }
@@ -130,7 +130,7 @@
   BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
 
   // Find the Contact objects for all participants if they exists.
-  PFQuery *queryByEmails = [PFQuery queryWithClassName:NSStringFromClass([Contact class])];
+  PFQuery *queryByEmails = [PFQuery queryWithClassName:NSStringFromClass([ARContact class])];
   //queryByEmails.cachePolicy = kPFCachePolicyCacheElseNetwork;
   [queryByEmails whereKey:@"emails" containedIn:emails];
   [[queryByEmails findObjectsInBackground]
@@ -141,9 +141,9 @@
        }
 
        // Build an index of email -> contact, for each email the contact has.
-       NSArray<Contact *> *contacts = t.result;
+       NSArray<ARContact *> *contacts = t.result;
 
-       NSDictionary<NSString *, Contact *> *index = [self _indexForContacts:contacts];
+       NSDictionary<NSString *, ARContact *> *index = [self _indexForContacts:contacts];
        [task setResult:index];
        return nil;
      }];
@@ -183,8 +183,8 @@
     }
 
     // 3. Build a Schedule object full of AREvent objects and a list of all Contacts.
-    NSDictionary<NSString *, Contact *> *emailContactIndex = t.result;
-    NSMutableSet<Contact *> *contacts = [NSMutableSet set];
+    NSDictionary<NSString *, ARContact *> *emailContactIndex = t.result;
+    NSMutableSet<ARContact *> *contacts = [NSMutableSet set];
 
     NSMutableArray<AREvent *> *events = [NSMutableArray array];
     for (EKEvent *event in underlyingEvents) {
@@ -194,7 +194,7 @@
         // If we found a Contact object for this email, record that, otherwise
         // mark that email with a reference to NSNull so we can see downstream that
         // we didnt find one.
-        Contact *contact = emailContactIndex[email];
+        ARContact *contact = emailContactIndex[email];
         if (contact) {
           [contacts addObject:contact];
           eventContacts[email] = contact;

@@ -6,9 +6,9 @@
 //  Copyright © 2017 Overlord. All rights reserved.
 //
 
-#import "Contact.h"
+#import "ARContact.h"
 
-@interface Contact ()
+@interface ARContact ()
 
 @property (nonatomic, copy) NSString *fullName;
 @property (nonatomic, copy) NSArray<NSString *> *emails;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation Contact
+@implementation ARContact
 
 @dynamic fullName;
 @dynamic emails;
@@ -28,7 +28,7 @@
 
 + (instancetype)contactWithFullName:(NSString *)fullName emails:(NSArray<NSString *> *)emails
 {
-  Contact *c = [Contact object];
+  ARContact *c = [ARContact object];
   c.fullName = fullName;
   c.emails = emails;
   return c;
@@ -40,7 +40,7 @@
 
 + (NSString *)parseClassName
 {
-  return @"Contact";
+  return @"ARContact";
 }
 
 - (PFRelation *)annotations

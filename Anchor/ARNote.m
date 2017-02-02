@@ -8,11 +8,11 @@
 
 #import "ARNote.h"
 
-#import "Contact.h"
+#import "ARContact.h"
 
 @interface ARNote ()
 
-@property (nonatomic, strong) Contact *contact;
+@property (nonatomic, strong) ARContact *contact;
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, strong) NSDate *date;
 
@@ -24,7 +24,7 @@
 @dynamic text;
 @dynamic date;
 
-+ (instancetype)noteForContact:(Contact *)contact withText:(NSString *)text date:(NSDate *)date
++ (instancetype)noteForContact:(ARContact *)contact withText:(NSString *)text date:(NSDate *)date
 {
   ARNote *note = [ARNote object];
   note.contact = contact;

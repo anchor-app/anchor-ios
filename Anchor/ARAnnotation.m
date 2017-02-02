@@ -10,7 +10,7 @@
 
 @interface ARAnnotation ()
 
-@property (nonatomic, strong) Contact *contact;
+@property (nonatomic, strong) ARContact *contact;
 @property (nonatomic, copy) NSString *key;
 @property (nonatomic, copy) NSString *value;
 
@@ -22,7 +22,7 @@
 @dynamic key;
 @dynamic value;
 
-+ (instancetype)annotationForContact:(Contact *)contact withKey:(NSString *)key value:(NSString *)value
++ (instancetype)annotationForContact:(ARContact *)contact withKey:(NSString *)key value:(NSString *)value
 {
   ARAnnotation *a = [ARAnnotation object];
   a.contact = contact;

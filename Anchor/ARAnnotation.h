@@ -8,14 +8,14 @@
 
 #import <Parse/Parse.h>
 
-@class Contact;
+@class ARContact;
 
 @interface ARAnnotation : PFObject <PFSubclassing>
 
-@property (nonatomic, readonly, strong) Contact *contact;
+@property (nonatomic, readonly, strong) ARContact *contact;
 @property (nonatomic, readonly, copy) NSString *key;
 @property (nonatomic, readonly, copy) NSString *value;
 
-+ (instancetype)annotationForContact:(Contact *)contact withKey:(NSString *)key value:(NSString *)value;
++ (instancetype)annotationForContact:(ARContact *)contact withKey:(NSString *)key value:(NSString *)value;
 
 @end

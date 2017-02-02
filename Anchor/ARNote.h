@@ -11,14 +11,14 @@
 #import <EventKit/EventKit.h>
 #import <Parse/Parse.h>
 
-@class Contact;
+@class ARContact;
 
 @interface ARNote : PFObject <PFSubclassing>
 
 @property (nonatomic, readonly, strong) NSDate *date;
 @property (nonatomic, readonly, copy) NSString *text;
-@property (nonatomic, readonly, strong) Contact *contact;
+@property (nonatomic, readonly, strong) ARContact *contact;
 
-+ (instancetype)noteForContact:(Contact *)contact withText:(NSString *)text date:(NSDate *)date;
++ (instancetype)noteForContact:(ARContact *)contact withText:(NSString *)text date:(NSDate *)date;
 
 @end

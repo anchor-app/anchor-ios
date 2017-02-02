@@ -14,14 +14,14 @@
 
 @interface ARContactDetailViewController ()
 
-@property (nonatomic, strong) Contact *contact;
+@property (nonatomic, strong) ARContact *contact;
 @property (nonatomic, strong) NSArray *dataSources;
 
 @end
 
 @implementation ARContactDetailViewController
 
-- (instancetype)initWithContact:(Contact *)contact
+- (instancetype)initWithContact:(ARContact *)contact
 {
   if (self = [super initWithStyle:UITableViewStyleGrouped]) {
     self.contact = contact;

@@ -11,7 +11,7 @@
 #import <FontAwesomeKit/FontAwesomeKit.h>
 
 #import "ARContactDetailViewController.h"
-#import "Contact.h"
+#import "ARContact.h"
 #import "AREvent.h"
 #import "Schedule.h"
 #import "ARCalendarManager.h"
@@ -96,7 +96,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
- AREvent *e = [_schedule.events objectAtIndex:section];
+  AREvent *e = [_schedule.events objectAtIndex:section];
   return e.participants.count;
 }
 
@@ -108,7 +108,7 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
   }
 
- AREvent *event = [_schedule.events objectAtIndex:indexPath.section];
+  AREvent *event = [_schedule.events objectAtIndex:indexPath.section];
   NSString *email = [event emailAtIndex:indexPath.row];
   id contactOrNull = [event contactOrNullAtIndex:indexPath.row];
 
@@ -116,7 +116,7 @@
     cell.textLabel.text = email;
     cell.accessoryType = UITableViewCellAccessoryNone;
   } else {
-    Contact *contact = (Contact *)contactOrNull;
+    ARContact *contact = (ARContact *)contactOrNull;
     cell.textLabel.text = contact.fullName;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
@@ -126,7 +126,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
- AREvent *e = [_schedule.events objectAtIndex:section];
+  AREvent *e = [_schedule.events objectAtIndex:section];
 
   NSTimeInterval duration = [e.underlyingEvent.endDate timeIntervalSinceDate:e.underlyingEvent.startDate];
   NSString *title = [NSString stringWithFormat:@"%@ (%ld min) %@",
@@ -138,11 +138,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
- AREvent *event = [_schedule.events objectAtIndex:indexPath.section];
+  AREvent *event = [_schedule.events objectAtIndex:indexPath.section];
   id contactOrNull = [event contactOrNullAtIndex:indexPath.row];
 
   if (![contactOrNull isEqual:[NSNull null]]) {
-    Contact *contact = (Contact *)contactOrNull;
+    ARContact *contact = (ARContact *)contactOrNull;
     ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:contact];
     [self.navigationController pushViewController:vc animated:YES];
   }

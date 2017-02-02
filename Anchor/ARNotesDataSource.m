@@ -10,7 +10,7 @@
 
 #import "ARNoteTableViewCell.h"
 #import "ARNote.h"
-#import "Contact.h"
+#import "ARContact.h"
 
 @implementation ARNotesDataSource
 

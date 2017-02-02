@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class Contact;
+@class ARContact;
 
 @interface ARContactDetailViewController : UITableViewController
 
-- (instancetype)initWithContact:(Contact *)contact;
+- (instancetype)initWithContact:(ARContact *)contact;
 
 @end

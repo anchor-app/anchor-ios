@@ -10,7 +10,7 @@
 
 #import <Parse/Parse.h>
 
-@class Contact;
+@class ARContact;
 @class AREvent;
 
 /**
@@ -18,9 +18,9 @@
  */
 @interface Schedule : NSObject
 
-+ (instancetype)scheduleWithEvents:(NSArray<AREvent *> *)events contacts:(NSArray<Contact *> *)contacts;
++ (instancetype)scheduleWithEvents:(NSArray<AREvent *> *)events contacts:(NSArray<ARContact *> *)contacts;
 
 @property (nonatomic, readonly, copy) NSArray<AREvent *> *events;
-@property (nonatomic, readonly, copy) NSArray<Contact *> *contacts;
+@property (nonatomic, readonly, copy) NSArray<ARContact *> *contacts;
 
 @end

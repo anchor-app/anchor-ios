@@ -9,17 +9,17 @@
 #import "ARContactHeaderDataSource.h"
 
 #import "ARContactHeaderTableViewCell.h"
-#import "Contact.h"
+#import "ARContact.h"
 
 @interface ARContactHeaderDataSource ()
 
-@property (nonatomic, strong) Contact *contact;
+@property (nonatomic, strong) ARContact *contact;
 
 @end
 
 @implementation ARContactHeaderDataSource
 
-- (instancetype)initWithContact:(Contact *)contact
+- (instancetype)initWithContact:(ARContact *)contact
 {
   if (self = [super init]) {
     self.contact = contact;
