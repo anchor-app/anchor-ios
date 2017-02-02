@@ -14,7 +14,7 @@
 #import "ARFullContact.h"
 #import "ARUser.h"
 #import "ARCalendarManager.h"
-#import "ScheduleViewController.h"
+#import "ARScheduleViewController.h"
 
 NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
 
@@ -51,7 +51,7 @@ NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
 
   _calendarManager = [[ARCalendarManager alloc] init];
 
-  UIViewController *scheduleController = [[ScheduleViewController alloc] initWithDate:[NSDate date] calendarManager:_calendarManager];
+  UIViewController *scheduleController = [[ARScheduleViewController alloc] initWithDate:[NSDate date] calendarManager:_calendarManager];
   _navigationController = [[UINavigationController alloc] initWithRootViewController:scheduleController];
 
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A2CA0F91E24026D00A583A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2CA0F81E24026D00A583A3 /* main.m */; };
 		0A2CA0FC1E24026D00A583A3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2CA0FB1E24026D00A583A3 /* AppDelegate.m */; };
-		0A2CA0FF1E24026D00A583A3 /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2CA0FE1E24026D00A583A3 /* ScheduleViewController.m */; };
+		0A2CA0FF1E24026D00A583A3 /* ARScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2CA0FE1E24026D00A583A3 /* ARScheduleViewController.m */; };
 		0A2CA1041E24026D00A583A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2CA1031E24026D00A583A3 /* Assets.xcassets */; };
 		0A2CA1121E24026D00A583A3 /* AnchorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2CA1111E24026D00A583A3 /* AnchorTests.m */; };
 		0A2CA11D1E24026D00A583A3 /* AnchorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2CA11C1E24026D00A583A3 /* AnchorUITests.m */; };
@@ -60,8 +60,8 @@
 		0A2CA0F81E24026D00A583A3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0A2CA0FA1E24026D00A583A3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0A2CA0FB1E24026D00A583A3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		0A2CA0FD1E24026D00A583A3 /* ScheduleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ScheduleViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		0A2CA0FE1E24026D00A583A3 /* ScheduleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ScheduleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0A2CA0FD1E24026D00A583A3 /* ARScheduleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ARScheduleViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0A2CA0FE1E24026D00A583A3 /* ARScheduleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ARScheduleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0A2CA1031E24026D00A583A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A2CA1081E24026D00A583A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A2CA10D1E24026D00A583A3 /* AnchorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnchorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,8 +270,8 @@
 				0A52FF731E4294CD00188E59 /* ARContactHeaderDataSource.m */,
 				0A52FF761E4294CD00188E59 /* ARContactDetailViewController.h */,
 				0A52FF771E4294CD00188E59 /* ARContactDetailViewController.m */,
-				0A2CA0FD1E24026D00A583A3 /* ScheduleViewController.h */,
-				0A2CA0FE1E24026D00A583A3 /* ScheduleViewController.m */,
+				0A2CA0FD1E24026D00A583A3 /* ARScheduleViewController.h */,
+				0A2CA0FE1E24026D00A583A3 /* ARScheduleViewController.m */,
 				0AAC39B71E2ECC2100065DFD /* SettingsViewController.h */,
 				0AAC39B81E2ECC2100065DFD /* SettingsViewController.m */,
 				0A52FF7C1E429C0600188E59 /* ARSingleSectionDataSource.h */,
@@ -591,7 +591,7 @@
 			files = (
 				0A52FF811E429DCD00188E59 /* ARNoteTableViewCell.m in Sources */,
 				0AAC39AA1E2550CE00065DFD /* Event.m in Sources */,
-				0A2CA0FF1E24026D00A583A3 /* ScheduleViewController.m in Sources */,
+				0A2CA0FF1E24026D00A583A3 /* ARScheduleViewController.m in Sources */,
 				0A52FF871E42A38C00188E59 /* ARAnnotationTableViewCell.m in Sources */,
 				0ABFFAD81E33176500EF98F0 /* ARFullContact.m in Sources */,
 				0AAC39B41E2C908200065DFD /* Schedule.m in Sources */,

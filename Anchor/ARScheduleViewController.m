@@ -6,7 +6,7 @@
 //  Copyright © 2017 Overlord. All rights reserved.
 //
 
-#import "ScheduleViewController.h"
+#import "ARScheduleViewController.h"
 
 #import <FontAwesomeKit/FontAwesomeKit.h>
 
@@ -18,7 +18,7 @@
 #import "SettingsViewController.h"
 #import "ARDatePagingView.h"
 
-@interface ScheduleViewController () <UITableViewDelegate, UITableViewDataSource, ARDatePagingViewDelegate>
+@interface ARScheduleViewController () <UITableViewDelegate, UITableViewDataSource, ARDatePagingViewDelegate>
 
 @property (nonatomic, strong) ARCalendarManager *calendarManager;
 @property (nonatomic, strong) UITableView *tableView;
@@ -30,7 +30,7 @@
 
 @end
 
-@implementation ScheduleViewController
+@implementation ARScheduleViewController
 
 - (instancetype)initWithDate:(NSDate *)date calendarManager:(ARCalendarManager *)calendarManager
 {
@@ -102,7 +102,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSString *identifier = @"ScheduleViewControllerContactCell";
+  NSString *identifier = @"ARScheduleViewControllerContactCell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];

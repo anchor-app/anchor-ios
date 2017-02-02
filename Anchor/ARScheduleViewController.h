@@ -10,7 +10,7 @@
 
 @class ARCalendarManager;
 
-@interface ScheduleViewController : UIViewController
+@interface ARScheduleViewController : UIViewController
 
 - (instancetype)initWithDate:(NSDate *)date calendarManager:(ARCalendarManager *)calendarManager;
 
