@@ -13,7 +13,7 @@
 #import "ARContactDetailViewController.h"
 #import "ARContact.h"
 #import "AREvent.h"
-#import "Schedule.h"
+#import "ARSchedule.h"
 #import "ARCalendarManager.h"
 #import "ARSettingsViewController.h"
 #import "ARDatePagingView.h"
@@ -22,7 +22,7 @@
 
 @property (nonatomic, strong) ARCalendarManager *calendarManager;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) Schedule *schedule;
+@property (nonatomic, strong) ARSchedule *schedule;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSDateFormatter *startTimeFormatter;
 @property (nonatomic, strong) UINavigationController *settingsController;

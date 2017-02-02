@@ -1,5 +1,5 @@
 //
-//  Schedule.h
+//  ARSchedule.h
 //  Anchor
 //
 //  Created by Austen McDonald on 1/15/17.
@@ -16,7 +16,7 @@
 /**
  Designed for local storage.
  */
-@interface Schedule : NSObject
+@interface ARSchedule : NSObject
 
 + (instancetype)scheduleWithEvents:(NSArray<AREvent *> *)events contacts:(NSArray<ARContact *> *)contacts;
 

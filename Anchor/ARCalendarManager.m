@@ -13,7 +13,7 @@
 
 #import "ARContact.h"
 #import "AREvent.h"
-#import "Schedule.h"
+#import "ARSchedule.h"
 
 @interface ARCalendarManager ()
 
@@ -182,7 +182,7 @@
       return nil;
     }
 
-    // 3. Build a Schedule object full of AREvent objects and a list of all Contacts.
+    // 3. Build a ARSchedule object full of AREvent objects and a list of all Contacts.
     NSDictionary<NSString *, ARContact *> *emailContactIndex = t.result;
     NSMutableSet<ARContact *> *contacts = [NSMutableSet set];
 
@@ -207,7 +207,7 @@
       [events addObject:e];
     }
 
-    [task setResult:[Schedule scheduleWithEvents:events contacts:[contacts allObjects]]];
+    [task setResult:[ARSchedule scheduleWithEvents:events contacts:[contacts allObjects]]];
 
     return nil;
   }];
