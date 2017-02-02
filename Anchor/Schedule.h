@@ -11,16 +11,16 @@
 #import <Parse/Parse.h>
 
 @class Contact;
-@class Event;
+@class AREvent;
 
 /**
  Designed for local storage.
  */
 @interface Schedule : NSObject
 
-+ (instancetype)scheduleWithEvents:(NSArray<Event *> *)events contacts:(NSArray<Contact *> *)contacts;
++ (instancetype)scheduleWithEvents:(NSArray<AREvent *> *)events contacts:(NSArray<Contact *> *)contacts;
 
-@property (nonatomic, readonly, copy) NSArray<Event *> *events;
+@property (nonatomic, readonly, copy) NSArray<AREvent *> *events;
 @property (nonatomic, readonly, copy) NSArray<Contact *> *contacts;
 
 @end

@@ -12,7 +12,7 @@
 
 #import "ARContactDetailViewController.h"
 #import "Contact.h"
-#import "Event.h"
+#import "AREvent.h"
 #import "Schedule.h"
 #import "ARCalendarManager.h"
 #import "ARSettingsViewController.h"
@@ -96,7 +96,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  Event *e = [_schedule.events objectAtIndex:section];
+ AREvent *e = [_schedule.events objectAtIndex:section];
   return e.participants.count;
 }
 
@@ -108,7 +108,7 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
   }
 
-  Event *event = [_schedule.events objectAtIndex:indexPath.section];
+ AREvent *event = [_schedule.events objectAtIndex:indexPath.section];
   NSString *email = [event emailAtIndex:indexPath.row];
   id contactOrNull = [event contactOrNullAtIndex:indexPath.row];
 
@@ -126,7 +126,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-  Event *e = [_schedule.events objectAtIndex:section];
+ AREvent *e = [_schedule.events objectAtIndex:section];
 
   NSTimeInterval duration = [e.underlyingEvent.endDate timeIntervalSinceDate:e.underlyingEvent.startDate];
   NSString *title = [NSString stringWithFormat:@"%@ (%ld min) %@",
@@ -138,7 +138,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  Event *event = [_schedule.events objectAtIndex:indexPath.section];
+ AREvent *event = [_schedule.events objectAtIndex:indexPath.section];
   id contactOrNull = [event contactOrNullAtIndex:indexPath.row];
 
   if (![contactOrNull isEqual:[NSNull null]]) {

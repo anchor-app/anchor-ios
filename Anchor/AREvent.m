@@ -1,16 +1,16 @@
 //
-//  Event.m
+//  AREvent.m
 //  Anchor
 //
 //  Created by Austen McDonald on 1/10/17.
 //  Copyright © 2017 Overlord. All rights reserved.
 //
 
-#import "Event.h"
+#import "AREvent.h"
 
 #import <EventKit/EventKit.h>
 
-@interface Event ()
+@interface AREvent ()
 
 @property (nonatomic, copy) NSDictionary<NSString *, id> *participants;
 @property (nonatomic, strong) EKEvent *underlyingEvent;
@@ -19,13 +19,13 @@
 
 @end
 
-@implementation Event {
+@implementation AREvent {
   NSArray *_emailArray;
 }
 
 + (instancetype)eventWithParticipants:(NSDictionary<NSString *, id> *)participants underlyingEvent:(EKEvent *)underlyingEvent
 {
-  Event *e = [[Event alloc] init];
+  AREvent *e = [[AREvent alloc] init];
   e.participants = participants;
   e.underlyingEvent = underlyingEvent;
 

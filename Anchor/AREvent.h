@@ -1,5 +1,5 @@
 //
-//  Event.h
+//  AREvent.h
 //  Anchor
 //
 //  Created by Austen McDonald on 1/10/17.
@@ -13,7 +13,7 @@
 /**
  Designed for local storage.
  */
-@interface Event : NSObject
+@interface AREvent : NSObject
 
 // email -> Contact or NSNull
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, id> *participants;

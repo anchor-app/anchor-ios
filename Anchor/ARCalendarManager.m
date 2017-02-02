@@ -12,7 +12,7 @@
 #import <EventKit/EventKit.h>
 
 #import "Contact.h"
-#import "Event.h"
+#import "AREvent.h"
 #import "Schedule.h"
 
 @interface ARCalendarManager ()
@@ -182,11 +182,11 @@
       return nil;
     }
 
-    // 3. Build a Schedule object full of Event objects and a list of all Contacts.
+    // 3. Build a Schedule object full of AREvent objects and a list of all Contacts.
     NSDictionary<NSString *, Contact *> *emailContactIndex = t.result;
     NSMutableSet<Contact *> *contacts = [NSMutableSet set];
 
-    NSMutableArray<Event *> *events = [NSMutableArray array];
+    NSMutableArray<AREvent *> *events = [NSMutableArray array];
     for (EKEvent *event in underlyingEvents) {
       NSArray<NSString *> *emailsInEvent = eventEmailsIndex[event.eventIdentifier];
       NSMutableDictionary<NSString *, id> *eventContacts = [NSMutableDictionary dictionary];
@@ -203,7 +203,7 @@
         }
       }
 
-      Event *e = [Event eventWithParticipants:eventContacts underlyingEvent:event];
+     AREvent *e = [AREvent eventWithParticipants:eventContacts underlyingEvent:event];
       [events addObject:e];
     }
 

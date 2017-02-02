@@ -10,14 +10,14 @@
 
 @interface Schedule ()
 
-@property (nonatomic, copy) NSArray<Event *> *events;
+@property (nonatomic, copy) NSArray<AREvent *> *events;
 @property (nonatomic, copy) NSArray<Contact *> *contacts;
 
 @end
 
 @implementation Schedule
 
-+ (instancetype)scheduleWithEvents:(NSArray<Event *> *)events contacts:(NSArray<Contact *> *)contacts
++ (instancetype)scheduleWithEvents:(NSArray<AREvent *> *)events contacts:(NSArray<Contact *> *)contacts
 {
   Schedule *s = [[Schedule alloc] init];
   s.events = events;

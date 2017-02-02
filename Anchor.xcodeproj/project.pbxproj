@@ -26,7 +26,7 @@
 		0A52FF871E42A38C00188E59 /* ARAnnotationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF861E42A38C00188E59 /* ARAnnotationTableViewCell.m */; };
 		0A52FF8B1E42B22700188E59 /* ARDatePagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */; };
 		0AAC39A71E24727400065DFD /* ARCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A61E24727400065DFD /* ARCalendarManager.m */; };
-		0AAC39AA1E2550CE00065DFD /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A91E2550CE00065DFD /* Event.m */; };
+		0AAC39AA1E2550CE00065DFD /* AREvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A91E2550CE00065DFD /* AREvent.m */; };
 		0AAC39AD1E25512800065DFD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39AC1E25512800065DFD /* Contact.m */; };
 		0AAC39B41E2C908200065DFD /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39B31E2C908200065DFD /* Schedule.m */; };
 		0AAC39B91E2ECC2100065DFD /* ARSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39B81E2ECC2100065DFD /* ARSettingsViewController.m */; };
@@ -96,8 +96,8 @@
 		0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDatePagingView.m; sourceTree = "<group>"; };
 		0AAC39A51E24727400065DFD /* ARCalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ARCalendarManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0AAC39A61E24727400065DFD /* ARCalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ARCalendarManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		0AAC39A81E2550CE00065DFD /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Event.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		0AAC39A91E2550CE00065DFD /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Event.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0AAC39A81E2550CE00065DFD /* AREvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AREvent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0AAC39A91E2550CE00065DFD /* AREvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AREvent.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0AAC39AB1E25512800065DFD /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Contact.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0AAC39AC1E25512800065DFD /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Contact.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0AAC39B21E2C908200065DFD /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Schedule.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -245,8 +245,8 @@
 			children = (
 				0A52FF681E42886900188E59 /* ARNote.h */,
 				0A52FF691E42886900188E59 /* ARNote.m */,
-				0AAC39A81E2550CE00065DFD /* Event.h */,
-				0AAC39A91E2550CE00065DFD /* Event.m */,
+				0AAC39A81E2550CE00065DFD /* AREvent.h */,
+				0AAC39A91E2550CE00065DFD /* AREvent.m */,
 				0AAC39AB1E25512800065DFD /* Contact.h */,
 				0AAC39AC1E25512800065DFD /* Contact.m */,
 				0AAC39B21E2C908200065DFD /* Schedule.h */,
@@ -590,7 +590,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A52FF811E429DCD00188E59 /* ARNoteTableViewCell.m in Sources */,
-				0AAC39AA1E2550CE00065DFD /* Event.m in Sources */,
+				0AAC39AA1E2550CE00065DFD /* AREvent.m in Sources */,
 				0A2CA0FF1E24026D00A583A3 /* ARScheduleViewController.m in Sources */,
 				0A52FF871E42A38C00188E59 /* ARAnnotationTableViewCell.m in Sources */,
 				0ABFFAD81E33176500EF98F0 /* ARFullContact.m in Sources */,
