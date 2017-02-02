@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.h
+//  ARSettingsViewController.h
 //  Anchor
 //
 //  Created by Austen McDonald on 1/17/17.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UITableViewController
+@interface ARSettingsViewController : UITableViewController
 
 @end

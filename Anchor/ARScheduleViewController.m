@@ -15,7 +15,7 @@
 #import "Event.h"
 #import "Schedule.h"
 #import "ARCalendarManager.h"
-#import "SettingsViewController.h"
+#import "ARSettingsViewController.h"
 #import "ARDatePagingView.h"
 
 @interface ARScheduleViewController () <UITableViewDelegate, UITableViewDataSource, ARDatePagingViewDelegate>
@@ -83,7 +83,7 @@
 - (void)_handleSettings
 {
   if (!_settingsController) {
-    SettingsViewController *s = [[SettingsViewController alloc] init];
+    ARSettingsViewController *s = [[ARSettingsViewController alloc] init];
     _settingsController = [[UINavigationController alloc] initWithRootViewController:s];
   }
   [self presentViewController:_settingsController animated:YES completion:nil];

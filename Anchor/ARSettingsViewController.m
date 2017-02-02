@@ -1,12 +1,12 @@
 //
-//  SettingsViewController.m
+//  ARSettingsViewController.m
 //  Anchor
 //
 //  Created by Austen McDonald on 1/17/17.
 //  Copyright © 2017 Overlord. All rights reserved.
 //
 
-#import "SettingsViewController.h"
+#import "ARSettingsViewController.h"
 
 #import <AFMInfoBanner/AFMInfoBanner.h>
 #import <Parse/Parse.h>
@@ -48,11 +48,11 @@ NS_ENUM(NSInteger) {
   RowLogsCount,
 };
 
-@interface SettingsViewController () <PFLogInViewControllerDelegate>
+@interface ARSettingsViewController () <PFLogInViewControllerDelegate>
 
 @end
 
-@implementation SettingsViewController
+@implementation ARSettingsViewController
 
 - (instancetype)init
 {
@@ -169,7 +169,7 @@ NS_ENUM(NSInteger) {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSString *identifier = @"SettingsViewControllerCell";
+  NSString *identifier = @"ARSettingsViewControllerCell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];

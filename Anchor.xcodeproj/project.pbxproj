@@ -29,7 +29,7 @@
 		0AAC39AA1E2550CE00065DFD /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A91E2550CE00065DFD /* Event.m */; };
 		0AAC39AD1E25512800065DFD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39AC1E25512800065DFD /* Contact.m */; };
 		0AAC39B41E2C908200065DFD /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39B31E2C908200065DFD /* Schedule.m */; };
-		0AAC39B91E2ECC2100065DFD /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39B81E2ECC2100065DFD /* SettingsViewController.m */; };
+		0AAC39B91E2ECC2100065DFD /* ARSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39B81E2ECC2100065DFD /* ARSettingsViewController.m */; };
 		0ABFFAD41E3314F500EF98F0 /* ARUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABFFAD31E3314F500EF98F0 /* ARUser.m */; };
 		0ABFFAD81E33176500EF98F0 /* ARFullContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABFFAD71E33176500EF98F0 /* ARFullContact.m */; };
 		3573ECB7A4DAC108457C2106 /* libPods-Anchor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15DCA2252DEE97E6655B8BD7 /* libPods-Anchor.a */; };
@@ -103,8 +103,8 @@
 		0AAC39B21E2C908200065DFD /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Schedule.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0AAC39B31E2C908200065DFD /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Schedule.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0AAC39B61E2EABC200065DFD /* Anchor.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Anchor.pch; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		0AAC39B71E2ECC2100065DFD /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SettingsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		0AAC39B81E2ECC2100065DFD /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0AAC39B71E2ECC2100065DFD /* ARSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ARSettingsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0AAC39B81E2ECC2100065DFD /* ARSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ARSettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0ABFFAD21E3314F500EF98F0 /* ARUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARUser.h; sourceTree = "<group>"; };
 		0ABFFAD31E3314F500EF98F0 /* ARUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARUser.m; sourceTree = "<group>"; };
 		0ABFFAD61E33176500EF98F0 /* ARFullContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFullContact.h; sourceTree = "<group>"; };
@@ -272,8 +272,8 @@
 				0A52FF771E4294CD00188E59 /* ARContactDetailViewController.m */,
 				0A2CA0FD1E24026D00A583A3 /* ARScheduleViewController.h */,
 				0A2CA0FE1E24026D00A583A3 /* ARScheduleViewController.m */,
-				0AAC39B71E2ECC2100065DFD /* SettingsViewController.h */,
-				0AAC39B81E2ECC2100065DFD /* SettingsViewController.m */,
+				0AAC39B71E2ECC2100065DFD /* ARSettingsViewController.h */,
+				0AAC39B81E2ECC2100065DFD /* ARSettingsViewController.m */,
 				0A52FF7C1E429C0600188E59 /* ARSingleSectionDataSource.h */,
 				0A52FF7D1E429C0600188E59 /* ARSingleSectionDataSource.m */,
 				0A52FF831E42A2CE00188E59 /* ARAnnotationsDataSource.m */,
@@ -595,7 +595,7 @@
 				0A52FF871E42A38C00188E59 /* ARAnnotationTableViewCell.m in Sources */,
 				0ABFFAD81E33176500EF98F0 /* ARFullContact.m in Sources */,
 				0AAC39B41E2C908200065DFD /* Schedule.m in Sources */,
-				0AAC39B91E2ECC2100065DFD /* SettingsViewController.m in Sources */,
+				0AAC39B91E2ECC2100065DFD /* ARSettingsViewController.m in Sources */,
 				0A2CA0FC1E24026D00A583A3 /* AppDelegate.m in Sources */,
 				0AAC39A71E24727400065DFD /* ARCalendarManager.m in Sources */,
 				0A52FF6A1E42886900188E59 /* ARNote.m in Sources */,
