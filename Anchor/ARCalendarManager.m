@@ -1,12 +1,12 @@
 //
-//  CNGECalendarManager.m
+//  ARCalendarManager.m
 //  Anchor
 //
 //  Created by Austen McDonald on 1/9/17.
 //  Copyright © 2017 Overlord. All rights reserved.
 //
 
-#import "CNGECalendarManager.h"
+#import "ARCalendarManager.h"
 
 #import <Bolts/Bolts.h>
 #import <EventKit/EventKit.h>
@@ -15,14 +15,14 @@
 #import "Event.h"
 #import "Schedule.h"
 
-@interface CNGECalendarManager ()
+@interface ARCalendarManager ()
 
 @property (nonatomic, strong) EKEventStore *eventStore;
 @property (nonatomic, strong) NSCalendar *calendar;
 
 @end
 
-@implementation CNGECalendarManager {
+@implementation ARCalendarManager {
   dispatch_queue_t _queue;
 }
 

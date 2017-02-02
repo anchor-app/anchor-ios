@@ -13,7 +13,7 @@
 
 #import "ARFullContact.h"
 #import "ARUser.h"
-#import "CNGECalendarManager.h"
+#import "ARCalendarManager.h"
 #import "ScheduleViewController.h"
 
 NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
@@ -22,7 +22,7 @@ NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
-@property (nonatomic, strong) CNGECalendarManager *calendarManager;
+@property (nonatomic, strong) ARCalendarManager *calendarManager;
 
 @end
 
@@ -49,7 +49,7 @@ NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
   [DDLog addLogger:self.fileLogger];
 
 
-  _calendarManager = [[CNGECalendarManager alloc] init];
+  _calendarManager = [[ARCalendarManager alloc] init];
 
   UIViewController *scheduleController = [[ScheduleViewController alloc] initWithDate:[NSDate date] calendarManager:_calendarManager];
   _navigationController = [[UINavigationController alloc] initWithRootViewController:scheduleController];

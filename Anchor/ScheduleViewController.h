@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class CNGECalendarManager;
+@class ARCalendarManager;
 
 @interface ScheduleViewController : UIViewController
 
-- (instancetype)initWithDate:(NSDate *)date calendarManager:(CNGECalendarManager *)calendarManager;
+- (instancetype)initWithDate:(NSDate *)date calendarManager:(ARCalendarManager *)calendarManager;
 
 @end
 

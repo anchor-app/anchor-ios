@@ -14,13 +14,13 @@
 #import "Contact.h"
 #import "Event.h"
 #import "Schedule.h"
-#import "CNGECalendarManager.h"
+#import "ARCalendarManager.h"
 #import "SettingsViewController.h"
 #import "ARDatePagingView.h"
 
 @interface ScheduleViewController () <UITableViewDelegate, UITableViewDataSource, ARDatePagingViewDelegate>
 
-@property (nonatomic, strong) CNGECalendarManager *calendarManager;
+@property (nonatomic, strong) ARCalendarManager *calendarManager;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) Schedule *schedule;
 @property (nonatomic, strong) NSDate *date;
@@ -32,7 +32,7 @@
 
 @implementation ScheduleViewController
 
-- (instancetype)initWithDate:(NSDate *)date calendarManager:(CNGECalendarManager *)calendarManager
+- (instancetype)initWithDate:(NSDate *)date calendarManager:(ARCalendarManager *)calendarManager
 {
   if (self = [super init]) {
     self.calendarManager = calendarManager;

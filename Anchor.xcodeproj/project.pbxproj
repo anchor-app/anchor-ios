@@ -25,7 +25,7 @@
 		0A52FF841E42A2CE00188E59 /* ARAnnotationsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF831E42A2CE00188E59 /* ARAnnotationsDataSource.m */; };
 		0A52FF871E42A38C00188E59 /* ARAnnotationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF861E42A38C00188E59 /* ARAnnotationTableViewCell.m */; };
 		0A52FF8B1E42B22700188E59 /* ARDatePagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */; };
-		0AAC39A71E24727400065DFD /* CNGECalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A61E24727400065DFD /* CNGECalendarManager.m */; };
+		0AAC39A71E24727400065DFD /* ARCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A61E24727400065DFD /* ARCalendarManager.m */; };
 		0AAC39AA1E2550CE00065DFD /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A91E2550CE00065DFD /* Event.m */; };
 		0AAC39AD1E25512800065DFD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39AC1E25512800065DFD /* Contact.m */; };
 		0AAC39B41E2C908200065DFD /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39B31E2C908200065DFD /* Schedule.m */; };
@@ -94,8 +94,8 @@
 		0A52FF861E42A38C00188E59 /* ARAnnotationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARAnnotationTableViewCell.m; sourceTree = "<group>"; };
 		0A52FF891E42B22700188E59 /* ARDatePagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDatePagingView.h; sourceTree = "<group>"; };
 		0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDatePagingView.m; sourceTree = "<group>"; };
-		0AAC39A51E24727400065DFD /* CNGECalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CNGECalendarManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		0AAC39A61E24727400065DFD /* CNGECalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CNGECalendarManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0AAC39A51E24727400065DFD /* ARCalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ARCalendarManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0AAC39A61E24727400065DFD /* ARCalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ARCalendarManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0AAC39A81E2550CE00065DFD /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Event.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0AAC39A91E2550CE00065DFD /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Event.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0AAC39AB1E25512800065DFD /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Contact.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -192,8 +192,6 @@
 				0A2CA1031E24026D00A583A3 /* Assets.xcassets */,
 				0A2CA1081E24026D00A583A3 /* Info.plist */,
 				0A2CA0F71E24026D00A583A3 /* Supporting Files */,
-				0AAC39A51E24727400065DFD /* CNGECalendarManager.h */,
-				0AAC39A61E24727400065DFD /* CNGECalendarManager.m */,
 			);
 			path = Anchor;
 			sourceTree = "<group>";
@@ -264,6 +262,8 @@
 		0AAC39B51E2E9FB500065DFD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0AAC39A51E24727400065DFD /* ARCalendarManager.h */,
+				0AAC39A61E24727400065DFD /* ARCalendarManager.m */,
 				0A52FF701E4294CD00188E59 /* ARNotesDataSource.h */,
 				0A52FF711E4294CD00188E59 /* ARNotesDataSource.m */,
 				0A52FF721E4294CD00188E59 /* ARContactHeaderDataSource.h */,
@@ -597,7 +597,7 @@
 				0AAC39B41E2C908200065DFD /* Schedule.m in Sources */,
 				0AAC39B91E2ECC2100065DFD /* SettingsViewController.m in Sources */,
 				0A2CA0FC1E24026D00A583A3 /* AppDelegate.m in Sources */,
-				0AAC39A71E24727400065DFD /* CNGECalendarManager.m in Sources */,
+				0AAC39A71E24727400065DFD /* ARCalendarManager.m in Sources */,
 				0A52FF6A1E42886900188E59 /* ARNote.m in Sources */,
 				0AAC39AD1E25512800065DFD /* Contact.m in Sources */,
 				0A52FF791E4294CD00188E59 /* ARContactHeaderDataSource.m in Sources */,

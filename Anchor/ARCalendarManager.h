@@ -1,5 +1,5 @@
 //
-//  CNGECalendarManager.h
+//  ARCalendarManager.h
 //  Anchor
 //
 //  Created by Austen McDonald on 1/9/17.
@@ -10,7 +10,7 @@
 
 @class BFTask;
 
-@interface CNGECalendarManager : NSObject
+@interface ARCalendarManager : NSObject
 
 - (BFTask *)asyncFetchScheduleWithDate:(NSDate *)date;
 
