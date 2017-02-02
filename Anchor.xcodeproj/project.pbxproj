@@ -182,7 +182,9 @@
 		0A2CA0F61E24026D00A583A3 /* Anchor */ = {
 			isa = PBXGroup;
 			children = (
-				0A52FF881E42B21800188E59 /* Views */,
+				0A52FF911E42C0E500188E59 /* Settings View */,
+				0A52FF8F1E42C0B700188E59 /* Schedule View */,
+				0A52FF8C1E42C05D00188E59 /* Detail View */,
 				0ABFFAD51E33174D00EF98F0 /* FullContact */,
 				0AAC39B51E2E9FB500065DFD /* Controllers */,
 				0AAC39AE1E25512D00065DFD /* Models */,
@@ -199,6 +201,8 @@
 		0A2CA0F71E24026D00A583A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A52FF7C1E429C0600188E59 /* ARSingleSectionDataSource.h */,
+				0A52FF7D1E429C0600188E59 /* ARSingleSectionDataSource.m */,
 				0A2CA0F81E24026D00A583A3 /* main.m */,
 				0AAC39B61E2EABC200065DFD /* Anchor.pch */,
 				0A52FF6E1E428F4400188E59 /* Launch Screen.storyboard */,
@@ -224,20 +228,69 @@
 			path = AnchorUITests;
 			sourceTree = "<group>";
 		};
-		0A52FF881E42B21800188E59 /* Views */ = {
+		0A52FF8C1E42C05D00188E59 /* Detail View */ = {
+			isa = PBXGroup;
+			children = (
+				0A52FF761E4294CD00188E59 /* ARContactDetailViewController.h */,
+				0A52FF771E4294CD00188E59 /* ARContactDetailViewController.m */,
+				0A52FF8E1E42C0A100188E59 /* Views */,
+				0A52FF8D1E42C07700188E59 /* Data Sources */,
+			);
+			name = "Detail View";
+			sourceTree = "<group>";
+		};
+		0A52FF8D1E42C07700188E59 /* Data Sources */ = {
+			isa = PBXGroup;
+			children = (
+				0A52FF701E4294CD00188E59 /* ARNotesDataSource.h */,
+				0A52FF711E4294CD00188E59 /* ARNotesDataSource.m */,
+				0A52FF721E4294CD00188E59 /* ARContactHeaderDataSource.h */,
+				0A52FF731E4294CD00188E59 /* ARContactHeaderDataSource.m */,
+				0A52FF821E42A2CE00188E59 /* ARAnnotationsDataSource.h */,
+				0A52FF831E42A2CE00188E59 /* ARAnnotationsDataSource.m */,
+			);
+			name = "Data Sources";
+			sourceTree = "<group>";
+		};
+		0A52FF8E1E42C0A100188E59 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				0A52FF741E4294CD00188E59 /* ARContactHeaderTableViewCell.h */,
 				0A52FF751E4294CD00188E59 /* ARContactHeaderTableViewCell.m */,
 				0A52FF7F1E429DCD00188E59 /* ARNoteTableViewCell.h */,
 				0A52FF801E429DCD00188E59 /* ARNoteTableViewCell.m */,
-				0A52FF821E42A2CE00188E59 /* ARAnnotationsDataSource.h */,
 				0A52FF851E42A38C00188E59 /* ARAnnotationTableViewCell.h */,
 				0A52FF861E42A38C00188E59 /* ARAnnotationTableViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		0A52FF8F1E42C0B700188E59 /* Schedule View */ = {
+			isa = PBXGroup;
+			children = (
+				0A52FF901E42C0C200188E59 /* Views */,
+				0A2CA0FD1E24026D00A583A3 /* ARScheduleViewController.h */,
+				0A2CA0FE1E24026D00A583A3 /* ARScheduleViewController.m */,
+			);
+			name = "Schedule View";
+			sourceTree = "<group>";
+		};
+		0A52FF901E42C0C200188E59 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				0A52FF891E42B22700188E59 /* ARDatePagingView.h */,
 				0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		0A52FF911E42C0E500188E59 /* Settings View */ = {
+			isa = PBXGroup;
+			children = (
+				0AAC39B71E2ECC2100065DFD /* ARSettingsViewController.h */,
+				0AAC39B81E2ECC2100065DFD /* ARSettingsViewController.m */,
+			);
+			name = "Settings View";
 			sourceTree = "<group>";
 		};
 		0AAC39AE1E25512D00065DFD /* Models */ = {
@@ -264,19 +317,6 @@
 			children = (
 				0AAC39A51E24727400065DFD /* ARCalendarManager.h */,
 				0AAC39A61E24727400065DFD /* ARCalendarManager.m */,
-				0A52FF701E4294CD00188E59 /* ARNotesDataSource.h */,
-				0A52FF711E4294CD00188E59 /* ARNotesDataSource.m */,
-				0A52FF721E4294CD00188E59 /* ARContactHeaderDataSource.h */,
-				0A52FF731E4294CD00188E59 /* ARContactHeaderDataSource.m */,
-				0A52FF761E4294CD00188E59 /* ARContactDetailViewController.h */,
-				0A52FF771E4294CD00188E59 /* ARContactDetailViewController.m */,
-				0A2CA0FD1E24026D00A583A3 /* ARScheduleViewController.h */,
-				0A2CA0FE1E24026D00A583A3 /* ARScheduleViewController.m */,
-				0AAC39B71E2ECC2100065DFD /* ARSettingsViewController.h */,
-				0AAC39B81E2ECC2100065DFD /* ARSettingsViewController.m */,
-				0A52FF7C1E429C0600188E59 /* ARSingleSectionDataSource.h */,
-				0A52FF7D1E429C0600188E59 /* ARSingleSectionDataSource.m */,
-				0A52FF831E42A2CE00188E59 /* ARAnnotationsDataSource.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
