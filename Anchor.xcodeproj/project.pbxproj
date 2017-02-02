@@ -186,7 +186,7 @@
 				0A52FF8F1E42C0B700188E59 /* Schedule View */,
 				0A52FF8C1E42C05D00188E59 /* Detail View */,
 				0ABFFAD51E33174D00EF98F0 /* FullContact */,
-				0AAC39B51E2E9FB500065DFD /* Controllers */,
+				0AAC39B51E2E9FB500065DFD /* Calendar Manager */,
 				0AAC39AE1E25512D00065DFD /* Models */,
 				0A45D94C1E24035F006E4103 /* Anchor.entitlements */,
 				0A2CA0FA1E24026D00A583A3 /* AppDelegate.h */,
@@ -312,13 +312,13 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		0AAC39B51E2E9FB500065DFD /* Controllers */ = {
+		0AAC39B51E2E9FB500065DFD /* Calendar Manager */ = {
 			isa = PBXGroup;
 			children = (
 				0AAC39A51E24727400065DFD /* ARCalendarManager.h */,
 				0AAC39A61E24727400065DFD /* ARCalendarManager.m */,
 			);
-			name = Controllers;
+			name = "Calendar Manager";
 			sourceTree = "<group>";
 		};
 		0ABFFAD51E33174D00EF98F0 /* FullContact */ = {
