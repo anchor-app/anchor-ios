@@ -64,6 +64,21 @@
   return [emailTest evaluateWithObject:string];
 }
 
+- (NSString *)_extractEmailFromParticipant:(EKParticipant *)participant
+{
+  NSString *maybeEmail = participant.URL.resourceSpecifier;
+  // Drop optional 'mailto:' text.
+  NSString *prefix = @"mailto:";
+  if ([maybeEmail hasPrefix:prefix]) {
+    maybeEmail = [maybeEmail substringFromIndex:[prefix length]];
+  }
+  if (![self _validateEmail:maybeEmail]) {
+    return nil;
+  } else {
+    return maybeEmail;
+  }
+}
+
 - (NSDictionary<NSString *, NSArray<NSString *> *> *)_eventEmailsIndex:(NSArray<EKEvent *> *)events
 {
   NSMutableDictionary<NSString *, NSArray<NSString *> *> *index = [NSMutableDictionary dictionary];
@@ -73,18 +88,21 @@
       if (participant.isCurrentUser) {
         continue;
       }
-      NSString *maybeEmail = participant.URL.resourceSpecifier;
-      // Drop optional 'mailto:' text.
-      NSString *prefix = @"mailto:";
-      if ([maybeEmail hasPrefix:prefix]) {
-        maybeEmail = [maybeEmail substringFromIndex:[prefix length]];
-      }
-      if (![self _validateEmail:maybeEmail]) {
+      NSString *maybeEmail = [self _extractEmailFromParticipant:participant];
+      if (maybeEmail) {
+        [emails addObject:maybeEmail];
+      } else {
         DDLogWarn(@"Cannot find an email in URL '%@' for event %@", participant.URL, event);
-        continue;
       }
-      [emails addObject:maybeEmail];
     }
+
+    NSString *maybeEmail = [self _extractEmailFromParticipant:event.organizer];
+    if (maybeEmail) {
+      [emails addObject:maybeEmail];
+    } else {
+      DDLogWarn(@"Cannot find an email in URL '%@' for event %@", event.organizer, event);
+    }
+
     index[event.eventIdentifier] = emails;
   }
 
