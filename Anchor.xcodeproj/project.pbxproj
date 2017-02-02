@@ -24,6 +24,7 @@
 		0A52FF811E429DCD00188E59 /* ARNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF801E429DCD00188E59 /* ARNoteTableViewCell.m */; };
 		0A52FF841E42A2CE00188E59 /* ARAnnotationsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF831E42A2CE00188E59 /* ARAnnotationsDataSource.m */; };
 		0A52FF871E42A38C00188E59 /* ARAnnotationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF861E42A38C00188E59 /* ARAnnotationTableViewCell.m */; };
+		0A52FF8B1E42B22700188E59 /* ARDatePagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */; };
 		0AAC39A71E24727400065DFD /* CNGECalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A61E24727400065DFD /* CNGECalendarManager.m */; };
 		0AAC39AA1E2550CE00065DFD /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A91E2550CE00065DFD /* Event.m */; };
 		0AAC39AD1E25512800065DFD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39AC1E25512800065DFD /* Contact.m */; };
@@ -91,6 +92,8 @@
 		0A52FF831E42A2CE00188E59 /* ARAnnotationsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARAnnotationsDataSource.m; sourceTree = "<group>"; };
 		0A52FF851E42A38C00188E59 /* ARAnnotationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARAnnotationTableViewCell.h; sourceTree = "<group>"; };
 		0A52FF861E42A38C00188E59 /* ARAnnotationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARAnnotationTableViewCell.m; sourceTree = "<group>"; };
+		0A52FF891E42B22700188E59 /* ARDatePagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDatePagingView.h; sourceTree = "<group>"; };
+		0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDatePagingView.m; sourceTree = "<group>"; };
 		0AAC39A51E24727400065DFD /* CNGECalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CNGECalendarManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0AAC39A61E24727400065DFD /* CNGECalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CNGECalendarManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0AAC39A81E2550CE00065DFD /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Event.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -179,6 +182,7 @@
 		0A2CA0F61E24026D00A583A3 /* Anchor */ = {
 			isa = PBXGroup;
 			children = (
+				0A52FF881E42B21800188E59 /* Views */,
 				0ABFFAD51E33174D00EF98F0 /* FullContact */,
 				0AAC39B51E2E9FB500065DFD /* Controllers */,
 				0AAC39AE1E25512D00065DFD /* Models */,
@@ -220,6 +224,15 @@
 				0A2CA11E1E24026D00A583A3 /* Info.plist */,
 			);
 			path = AnchorUITests;
+			sourceTree = "<group>";
+		};
+		0A52FF881E42B21800188E59 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0A52FF891E42B22700188E59 /* ARDatePagingView.h */,
+				0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		0AAC39AE1E25512D00065DFD /* Models */ = {
@@ -596,6 +609,7 @@
 				0A52FF6D1E4288F500188E59 /* ARAnnotation.m in Sources */,
 				0A52FF781E4294CD00188E59 /* ARNotesDataSource.m in Sources */,
 				0A52FF7A1E4294CD00188E59 /* ARContactHeaderTableViewCell.m in Sources */,
+				0A52FF8B1E42B22700188E59 /* ARDatePagingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

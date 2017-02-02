@@ -256,6 +256,21 @@ NS_ENUM(NSInteger) {
           }];
           break;
         }
+        case RowFullContactSync:
+        {
+          DDLogInfo(@"Syncing FullContact contacts...");
+          [PFCloud callFunctionInBackground:@"sync" withParameters:nil block:^(NSString *message, NSError * _Nullable error) {
+            if (error) {
+              DDLogError(@"Error syncing FullContact contacts: %@", error);
+              [AFMInfoBanner showAndHideWithText:@"Error Syncing Contacts" style:AFMInfoBannerStyleError];
+            } else {
+              // To be safe, let's clear our local cache after this.
+              [self _clearCache];
+
+              [AFMInfoBanner showAndHideWithText:message style:AFMInfoBannerStyleInfo];
+            }
+          }];
+        }
       }
       break;
     }
@@ -277,6 +292,7 @@ NS_ENUM(NSInteger) {
     case SectionCache:
     {
       [self _clearCache];
+      [AFMInfoBanner showAndHideWithText:@"Cleared Local Caches" style:AFMInfoBannerStyleInfo];
     }
   }
 
@@ -333,8 +349,6 @@ NS_ENUM(NSInteger) {
 - (void)_clearCache
 {
   [PFQuery clearAllCachedResults];
-
-  [AFMInfoBanner showAndHideWithText:@"Cleared Local Caches" style:AFMInfoBannerStyleInfo];
   DDLogInfo(@"Cleared local caches");
 }
 

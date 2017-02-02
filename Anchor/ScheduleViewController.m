@@ -16,8 +16,9 @@
 #import "Schedule.h"
 #import "CNGECalendarManager.h"
 #import "SettingsViewController.h"
+#import "ARDatePagingView.h"
 
-@interface ScheduleViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ScheduleViewController () <UITableViewDelegate, UITableViewDataSource, ARDatePagingViewDelegate>
 
 @property (nonatomic, strong) CNGECalendarManager *calendarManager;
 @property (nonatomic, strong) UITableView *tableView;
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSDateFormatter *startTimeFormatter;
 @property (nonatomic, strong) UINavigationController *settingsController;
+@property (nonatomic, strong) ARDatePagingView *datePagingView;
 
 @end
 
@@ -33,8 +35,8 @@
 - (instancetype)initWithDate:(NSDate *)date calendarManager:(CNGECalendarManager *)calendarManager
 {
   if (self = [super init]) {
-    self.date = date;
     self.calendarManager = calendarManager;
+    self.date = date;
 
     self.startTimeFormatter = [[NSDateFormatter alloc] init];
     [self.startTimeFormatter setDateStyle:NSDateFormatterNoStyle];
@@ -44,11 +46,26 @@
 }
 
 - (void)loadView {
+  self.view = [[UIView alloc] initWithFrame:CGRectZero];
+
   self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
+  self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+  [self.view addSubview:self.tableView];
 
-  self.view = self.tableView;
+  self.datePagingView = [[ARDatePagingView alloc] initWithDate:self.date];
+  _datePagingView.delegate = self;
+  [self.view addSubview:self.datePagingView];
+
+  CGSize size = [self.datePagingView sizeThatFits:self.view.frame.size];
+  self.tableView.contentInset = UIEdgeInsetsMake(size.height, 0, 0, 0);
+}
+
+- (void)viewDidLayoutSubviews
+{
+  CGSize size = [self.datePagingView sizeThatFits:self.tableView.frame.size];
+  self.datePagingView.frame = CGRectMake(0, self.topLayoutGuide.length, size.width, size.height);
 }
 
 - (void)viewDidLoad
@@ -61,21 +78,6 @@
   UIImage *settingsImage = [settingsIcon imageWithSize:CGSizeMake(25, 25)];
   UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:settingsImage style:UIBarButtonItemStylePlain target:self action:@selector(_handleSettings)];
   self.navigationItem.leftBarButtonItem = settingsButton;
-
-  // Kick off request to fetch schedule.
-  [[self.calendarManager asyncFetchScheduleWithDate:self.date] continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {
-    if (t.error) {
-      DDLogError(@"Loading schedule for date %@ failed: %@", self.date, t.error);
-      return nil;
-    }
-    DDLogInfo(@"Loaded schedule for date %@: events(%lu) contacts(%lu)", self.date, self.schedule.events.count, (unsigned long)self.schedule.contacts.count);
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-      self.schedule = t.result;
-      [self.tableView reloadData];
-    });
-    return nil;
-  }];
 }
 
 - (void)_handleSettings
@@ -144,6 +146,31 @@
     ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:contact];
     [self.navigationController pushViewController:vc animated:YES];
   }
+}
+
+- (void)setDate:(NSDate *)date
+{
+  _date = date;
+
+  // Kick off request to fetch schedule.
+  [[_calendarManager asyncFetchScheduleWithDate:_date] continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {
+    if (t.error) {
+      DDLogError(@"Loading schedule for date %@ failed: %@", _date, t.error);
+      return nil;
+    }
+    DDLogInfo(@"Loaded schedule for date %@: events(%lu) contacts(%lu)", _date, _schedule.events.count, (unsigned long)_schedule.contacts.count);
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+      _schedule = t.result;
+      [_tableView reloadData];
+    });
+    return nil;
+  }];
+}
+
+- (void)datePagingView:(ARDatePagingView *)view didChangeToDate:(NSDate *)date
+{
+  self.date = date;
 }
 
 @end
