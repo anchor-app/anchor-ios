@@ -163,7 +163,7 @@
     // 2. With those events, fetch all the Contact objects from the server with corresponding emails.
     underlyingEvents = t.result;
 
-    DDLogDebug(@"Fetched %lu events for %@", underlyingEvents.count, date);
+    DDLogDebug(@"Fetched %lu events for %@", (unsigned long)underlyingEvents.count, date);
 
     eventEmailsIndex = [self _eventEmailsIndex:underlyingEvents];
 

@@ -158,7 +158,7 @@
       DDLogError(@"Loading schedule for date %@ failed: %@", _date, t.error);
       return nil;
     }
-    DDLogInfo(@"Loaded schedule for date %@: events(%lu) contacts(%lu)", _date, _schedule.events.count, (unsigned long)_schedule.contacts.count);
+    DDLogInfo(@"Loaded schedule for date %@: events(%lu) contacts(%lu)", _date, (unsigned long)_schedule.events.count, (unsigned long)_schedule.contacts.count);
 
     dispatch_async(dispatch_get_main_queue(), ^{
       _schedule = t.result;
