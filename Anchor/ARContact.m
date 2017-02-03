@@ -40,7 +40,7 @@
 
 + (NSString *)parseClassName
 {
-  return @"ARContact";
+  return @"Contact";
 }
 
 - (PFRelation *)annotations
