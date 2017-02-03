@@ -16,7 +16,7 @@
 @interface ARNote : PFObject <PFSubclassing>
 
 @property (nonatomic, readonly, strong) NSDate *date;
-@property (nonatomic, readonly, copy) NSString *text;
+@property (nonatomic, copy) NSString *text;
 @property (nonatomic, readonly, strong) ARContact *contact;
 
 + (instancetype)noteForContact:(ARContact *)contact withText:(NSString *)text date:(NSDate *)date;

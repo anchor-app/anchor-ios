@@ -13,7 +13,6 @@
 @interface ARNote ()
 
 @property (nonatomic, strong) ARContact *contact;
-@property (nonatomic, copy) NSString *text;
 @property (nonatomic, strong) NSDate *date;
 
 @end
