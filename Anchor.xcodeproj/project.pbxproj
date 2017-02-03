@@ -13,6 +13,7 @@
 		0A2CA1041E24026D00A583A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2CA1031E24026D00A583A3 /* Assets.xcassets */; };
 		0A2CA1121E24026D00A583A3 /* AnchorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2CA1111E24026D00A583A3 /* AnchorTests.m */; };
 		0A2CA11D1E24026D00A583A3 /* AnchorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2CA11C1E24026D00A583A3 /* AnchorUITests.m */; };
+		0A331D531E44F4690067C5DF /* ARLogViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A331D521E44F4690067C5DF /* ARLogViewerViewController.m */; };
 		0A52FF6A1E42886900188E59 /* ARNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF691E42886900188E59 /* ARNote.m */; };
 		0A52FF6D1E4288F500188E59 /* ARAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF6C1E4288F500188E59 /* ARAnnotation.m */; };
 		0A52FF6F1E428F4400188E59 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A52FF6E1E428F4400188E59 /* Launch Screen.storyboard */; };
@@ -70,6 +71,8 @@
 		0A2CA1181E24026D00A583A3 /* AnchorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnchorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A2CA11C1E24026D00A583A3 /* AnchorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AnchorUITests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0A2CA11E1E24026D00A583A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A331D511E44F4690067C5DF /* ARLogViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLogViewerViewController.h; sourceTree = "<group>"; };
+		0A331D521E44F4690067C5DF /* ARLogViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLogViewerViewController.m; sourceTree = "<group>"; };
 		0A45D94C1E24035F006E4103 /* Anchor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Anchor.entitlements; sourceTree = "<group>"; };
 		0A52FF681E42886900188E59 /* ARNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARNote.h; sourceTree = "<group>"; };
 		0A52FF691E42886900188E59 /* ARNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARNote.m; sourceTree = "<group>"; };
@@ -289,6 +292,8 @@
 			children = (
 				0AAC39B71E2ECC2100065DFD /* ARSettingsViewController.h */,
 				0AAC39B81E2ECC2100065DFD /* ARSettingsViewController.m */,
+				0A331D511E44F4690067C5DF /* ARLogViewerViewController.h */,
+				0A331D521E44F4690067C5DF /* ARLogViewerViewController.m */,
 			);
 			name = "Settings View";
 			sourceTree = "<group>";
@@ -631,6 +636,7 @@
 			files = (
 				0A52FF811E429DCD00188E59 /* ARNoteTableViewCell.m in Sources */,
 				0AAC39AA1E2550CE00065DFD /* AREvent.m in Sources */,
+				0A331D531E44F4690067C5DF /* ARLogViewerViewController.m in Sources */,
 				0A2CA0FF1E24026D00A583A3 /* ARScheduleViewController.m in Sources */,
 				0A52FF871E42A38C00188E59 /* ARAnnotationTableViewCell.m in Sources */,
 				0ABFFAD81E33176500EF98F0 /* ARFullContact.m in Sources */,

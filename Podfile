@@ -12,7 +12,6 @@ target 'Anchor' do
   pod 'CocoaLumberjack'
   pod 'FontAwesomeKit', '~> 2.2.0'
   pod 'AFMInfoBanner'
-  pod 'LSLogViewer'
   pod 'AFNetworking'
   pod 'NSURL+QueryDictionary'
   pod 'SDWebImage', '~>3.8'

@@ -47,7 +47,6 @@ PODS:
     - FontAwesomeKit/Core
   - FontAwesomeKit/Zocial (2.2.1):
     - FontAwesomeKit/Core
-  - LSLogViewer (1.0)
   - NSURL+QueryDictionary (1.2.0)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
@@ -64,7 +63,6 @@ DEPENDENCIES:
   - AFNetworking
   - CocoaLumberjack
   - FontAwesomeKit (~> 2.2.0)
-  - LSLogViewer
   - NSURL+QueryDictionary
   - Parse
   - ParseUI
@@ -78,13 +76,12 @@ SPEC CHECKSUMS:
   CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
   CVKHierarchySearcher: 7be8d3bcbcc6f86ff07f785e6c632b5e40da2553
   FontAwesomeKit: 3614979b3dbb0ec3f7fac1bd760b91f66c31db67
-  LSLogViewer: 10fd49c76177c408049a84b5467ef30bd2e422ea
   NSURL+QueryDictionary: bae616404e2adf6409d3d5c02a093cbf44c8a236
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
   Underscore.m: dc9ca06fe2c9a79d01ce20c3d2c1e8f91f2d92dc
 
-PODFILE CHECKSUM: 287bd3b79a41a6cdcb275577662de1f683f77307
+PODFILE CHECKSUM: 63f89cc2c03a2e5abe0908cd2788e73329e94576
 
 COCOAPODS: 1.1.1

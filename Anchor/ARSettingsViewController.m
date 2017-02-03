@@ -11,12 +11,12 @@
 #import <AFMInfoBanner/AFMInfoBanner.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
-#import <LSLogViewer/LSLogViewer.h>
 #import <MessageUI/MessageUI.h>
 
 #import "AppDelegate.h"
 #import "ARUser.h"
 #import "ARFullContact.h"
+#import "ARLogViewerViewController.h"
 
 NS_ENUM(NSInteger) {
   SectionLogin,
@@ -270,6 +270,7 @@ NS_ENUM(NSInteger) {
               [AFMInfoBanner showAndHideWithText:message style:AFMInfoBannerStyleInfo];
             }
           }];
+          break;
         }
       }
       break;
@@ -279,7 +280,11 @@ NS_ENUM(NSInteger) {
       switch (indexPath.row) {
           case RowLogsView:
         {
-          [LSLogViewer showViewer];
+          NSData *logData = [self _logData];
+          NSString *logString = [[NSString alloc] initWithData:logData encoding:NSUTF8StringEncoding];
+
+          ARLogViewerViewController *vc = [[ARLogViewerViewController alloc] initWithLogs:logString];
+          [self.navigationController pushViewController:vc animated:YES];
           break;
         }
           case RowLogsEmail:
@@ -288,18 +293,20 @@ NS_ENUM(NSInteger) {
           break;
         }
       }
+      break;
     }
     case SectionCache:
     {
       [self _clearCache];
       [AFMInfoBanner showAndHideWithText:@"Cleared Local Caches" style:AFMInfoBannerStyleInfo];
+      break;
     }
   }
 
   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (NSMutableArray *)_logData
+- (NSData *)_logData
 {
   NSMutableArray *logFiles = [NSMutableArray array];
 
@@ -311,7 +318,11 @@ NS_ENUM(NSInteger) {
     NSData *fileData = [NSData dataWithContentsOfFile:info.filePath];
     [logFiles addObject:fileData];
   }
-  return logFiles;
+
+  return _.array(logFiles).reduce([NSMutableData data], ^id (NSMutableData *memo, NSData *file) {
+    [memo appendData:file];
+    return memo;
+  });
 }
 
 - (void)_emailLogs
@@ -320,10 +331,7 @@ NS_ENUM(NSInteger) {
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
     [mailViewController setSubject:@"Anchor ⚓️ Log Data" ];
 
-    NSMutableData *allLogData = _.array([self _logData]).reduce([NSMutableData data], ^id (NSMutableData *memo, NSData *file) {
-      [memo appendData:file];
-      return memo;
-    });
+    NSData *allLogData = [self _logData];
     [mailViewController addAttachmentData:allLogData mimeType:@"text/plain" fileName:@"logs.txt"];
 
     [self presentViewController:mailViewController animated:YES completion:nil];
