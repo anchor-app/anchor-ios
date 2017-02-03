@@ -12,6 +12,9 @@
 #import "ARNote.h"
 #import "ARContact.h"
 
+@interface ARNotesDataSource () <ARNoteTableViewCellDelegate>
+@end
+
 @implementation ARNotesDataSource
 
 - (instancetype)initWithNotes:(NSArray<ARNote *> *)notes
@@ -37,8 +40,31 @@
 
   ARNote *note = _notes[indexPath.row];
   cell.note = note;
+  cell.delegate = self;
 
   return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  ARNote *note = _notes[indexPath.row];
+
+  return [ARNoteTableViewCell heightForNote:note width:tableView.frame.size.width];
+}
+
+- (void)cell:(ARNoteTableViewCell *)cell note:(ARNote *)note textViewDidChange:(UITextView *)textView
+{
+  if (_delegate) {
+    // It could be that this is a new Note and we need to attach it to a contact.
+    // This is probably super inefficient.
+    [note.contact.notes addObject:note];
+    [note.contact saveEventually];
+
+    note.text = textView.text;
+    [note saveEventually];
+    
+    [_delegate dataSourceCellsHeightChanged:self];
+  }
 }
 
 @end

@@ -12,6 +12,6 @@
 
 @interface ARContactDetailViewController : UITableViewController
 
-- (instancetype)initWithContact:(ARContact *)contact;
+- (instancetype)initWithContact:(ARContact *)contact date:(NSDate *)date;
 
 @end

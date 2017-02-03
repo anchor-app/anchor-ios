@@ -143,7 +143,7 @@
 
   if (![contactOrNull isEqual:[NSNull null]]) {
     ARContact *contact = (ARContact *)contactOrNull;
-    ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:contact];
+    ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:contact date:_date];
     [self.navigationController pushViewController:vc animated:YES];
   }
 }

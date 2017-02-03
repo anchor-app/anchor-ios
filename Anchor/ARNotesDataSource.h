@@ -13,11 +13,19 @@
 #import "ARSingleSectionDataSource.h"
 
 @class ARNote;
+@class ARNotesDataSource;
+
+@protocol ARNotesDataSourceDelegate
+
+- (void)dataSourceCellsHeightChanged:(ARNotesDataSource *)dataSource;
+
+@end
 
 @interface ARNotesDataSource : ARSingleSectionDataSource
 
 - (instancetype)initWithNotes:(NSArray<ARNote *> *)notes;
 
 @property (nonatomic, copy) NSArray<ARNote *> *notes;
+@property (nonatomic, weak) id<ARNotesDataSourceDelegate> delegate;
 
 @end
