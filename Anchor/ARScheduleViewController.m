@@ -27,6 +27,8 @@
 @property (nonatomic, strong) NSDateFormatter *startTimeFormatter;
 @property (nonatomic, strong) UINavigationController *settingsController;
 @property (nonatomic, strong) ARDatePagingView *datePagingView;
+@property (nonatomic, strong) UIView *loadingView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
@@ -48,24 +50,35 @@
 - (void)loadView {
   self.view = [[UIView alloc] initWithFrame:CGRectZero];
 
+  self.loadingView = [[UIView alloc] initWithFrame:CGRectZero];
+  _loadingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+  _loadingView.backgroundColor = [UIColor colorWithRed:239./255. green:239./255. blue:244./255. alpha:1.0];
+
+  self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+  _activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+  _activityIndicatorView.color = [UIColor grayColor];
+  [_activityIndicatorView setHidden:NO];
+  [_loadingView addSubview:_activityIndicatorView];
+  [self.view addSubview:_loadingView];
+
   self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-  [self.view addSubview:self.tableView];
+  [self.view addSubview:_tableView];
 
   self.datePagingView = [[ARDatePagingView alloc] initWithDate:self.date];
   _datePagingView.delegate = self;
   [self.view addSubview:self.datePagingView];
-
-  CGSize size = [self.datePagingView sizeThatFits:self.view.frame.size];
-  self.tableView.contentInset = UIEdgeInsetsMake(size.height, 0, 0, 0);
 }
 
 - (void)viewDidLayoutSubviews
 {
   CGSize size = [self.datePagingView sizeThatFits:self.tableView.frame.size];
   self.datePagingView.frame = CGRectMake(0, self.topLayoutGuide.length, size.width, size.height);
+  self.tableView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length + size.height, 0, 0, 0);
+
+  _loadingView.frame = self.view.frame;
 }
 
 - (void)viewDidLoad
@@ -73,6 +86,8 @@
   [super viewDidLoad];
 
   self.title = @"Schedule";
+
+  [self _setLoading:YES];
 
   FAKIonIcons *settingsIcon = [FAKIonIcons iosGearOutlineIconWithSize:25];
   UIImage *settingsImage = [settingsIcon imageWithSize:CGSizeMake(25, 25)];
@@ -150,22 +165,40 @@
 
 - (void)setDate:(NSDate *)date
 {
-  _date = date;
+  NSCalendar *calendar = [NSCalendar currentCalendar];
+  if (!_date || ![calendar isDate:date equalToDate:_date toUnitGranularity:NSCalendarUnitDay]) {
+    _date = date;
 
-  // Kick off request to fetch schedule.
-  [[_calendarManager asyncFetchScheduleWithDate:_date] continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {
-    if (t.error) {
-      DDLogError(@"Loading schedule for date %@ failed: %@", _date, t.error);
+    [self _setLoading:YES];
+
+    // Kick off request to fetch schedule.
+    [[_calendarManager asyncFetchScheduleWithDate:_date] continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {
+      if (t.error) {
+        DDLogError(@"Loading schedule for date %@ failed: %@", _date, t.error);
+        return nil;
+      }
+      DDLogInfo(@"Loaded schedule for date %@: events(%lu) contacts(%lu)", _date, (unsigned long)_schedule.events.count, (unsigned long)_schedule.contacts.count);
+
+      dispatch_async(dispatch_get_main_queue(), ^{
+        _schedule = t.result;
+        [self _setLoading:NO];
+        [_tableView reloadData];
+      });
       return nil;
-    }
-    DDLogInfo(@"Loaded schedule for date %@: events(%lu) contacts(%lu)", _date, (unsigned long)_schedule.events.count, (unsigned long)_schedule.contacts.count);
+    }];
+  }
+}
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-      _schedule = t.result;
-      [_tableView reloadData];
-    });
-    return nil;
-  }];
+- (void)_setLoading:(BOOL)loading
+{
+  if (loading) {
+    [_tableView setHidden:YES];
+    [_activityIndicatorView startAnimating];
+  } else {
+    [_tableView setContentOffset:CGPointMake(0, -_tableView.contentInset.top) animated:NO];
+    [_tableView setHidden:NO];
+    [_activityIndicatorView stopAnimating];
+  }
 }
 
 - (void)datePagingView:(ARDatePagingView *)view didChangeToDate:(NSDate *)date
