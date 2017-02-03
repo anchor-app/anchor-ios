@@ -97,7 +97,7 @@
     }
 
     NSString *maybeEmail = [self _extractEmailFromParticipant:event.organizer];
-    if (maybeEmail) {
+    if (maybeEmail && !event.organizer.isCurrentUser) {
       [emails addObject:maybeEmail];
     } else {
       DDLogWarn(@"Cannot find an email in URL '%@' for event %@", event.organizer, event);
