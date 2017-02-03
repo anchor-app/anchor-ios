@@ -12,4 +12,6 @@
 
 @interface ARSingleSectionDataSource : NSObject <UITableViewDataSource>
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
