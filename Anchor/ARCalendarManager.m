@@ -85,22 +85,25 @@
   for (EKEvent *event in events) {
     NSMutableArray<NSString *> *emails = [NSMutableArray array];
     for (EKParticipant *participant in event.attendees) {
-      if (participant.isCurrentUser) {
+      if (participant.isCurrentUser ||
+          !participant.URL.resourceSpecifier ||
+          participant.participantType & EKParticipantTypeRoom)
+      {
         continue;
       }
       NSString *maybeEmail = [self _extractEmailFromParticipant:participant];
       if (maybeEmail) {
         [emails addObject:maybeEmail];
       } else {
-        DDLogWarn(@"Cannot find an email in URL '%@' for event %@", participant.URL, event);
+        DDLogWarn(@"Cannot find an email in URL '%@' for event %@", participant.URL, event.title);
       }
     }
 
     NSString *maybeEmail = [self _extractEmailFromParticipant:event.organizer];
     if (maybeEmail && !event.organizer.isCurrentUser) {
       [emails addObject:maybeEmail];
-    } else {
-      DDLogWarn(@"Cannot find an email in URL '%@' for event %@", event.organizer, event);
+    } else if (!event.organizer.isCurrentUser) {
+      DDLogWarn(@"Cannot find organizer email in URL '%@' for event %@", event.organizer.URL, event.title);
     }
 
     index[event.eventIdentifier] = emails;
