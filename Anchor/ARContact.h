@@ -19,8 +19,8 @@
 @property (nonatomic, readonly, copy) NSArray<NSString *> *emails;
 @property (nonatomic, readonly, copy) NSString *fullContactJSON;
 @property (nonatomic, readonly, copy) NSString *photoURL;
-@property (nonatomic, strong) PFRelation *notes;
-@property (nonatomic, strong) PFRelation *annotations;
+@property (nonatomic, readonly, strong) PFRelation *notes;
+@property (nonatomic, readonly, strong) PFRelation *annotations;
 
 + (instancetype)contactWithFullName:(NSString *)fullName emails:(NSArray<NSString *> *)emails;
 

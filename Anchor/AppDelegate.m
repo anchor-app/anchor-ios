@@ -48,6 +48,11 @@ NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
 
   [DDLog addLogger:self.fileLogger];
 
+  [Parse setLogLevel:PFLogLevelDebug];
+  // Register observer and selector to receive the request we sent to server
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveWillSendURLRequestNotification:) name:PFNetworkWillSendURLRequestNotification object:nil];
+  // Register observer and selector to receive the response we get from server
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDidReceiveURLResponseNotification:) name:PFNetworkDidReceiveURLResponseNotification object:nil];
 
   _calendarManager = [[ARCalendarManager alloc] init];
 
@@ -65,6 +70,22 @@ NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
   }
 
   return YES;
+}
+
+- (void)receiveWillSendURLRequestNotification:(NSNotification *) notification {
+//  // Use key to get the NSURLRequest from userInfo
+//  NSURLRequest *request = notification.userInfo[PFNetworkNotificationURLRequestUserInfoKey];
+//  // DDLogDebug(@"outgoing: %@", request);
+//  // DDLogDebug(@"out body: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+}
+
+- (void)receiveDidReceiveURLResponseNotification:(NSNotification *) notification {
+//  // Use key to get the NSURLRequest from userInfo
+//  NSURLRequest *request = notification.userInfo[PFNetworkNotificationURLRequestUserInfoKey];
+//  // Use key to get the NSURLResponse from userInfo
+//  NSURLResponse *response = notification.userInfo[PFNetworkNotificationURLResponseUserInfoKey];
+//  NSString *responseBody = notification.userInfo[PFNetworkNotificationURLResponseBodyUserInfoKey];
+//  // DDLogDebug(@"incoming: %@", response);
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url

@@ -8,20 +8,25 @@
 
 #import "ARContactDetailViewController.h"
 
+#import <FontAwesomeKit/FontAwesomeKit.h>
+
 #import "ARContactHeaderDataSource.h"
-#import "ARNotesDataSource.h"
-#import "ARAnnotationsDataSource.h"
+#import "ARKeyValueDataSource.h"
+#import "ARAnnotation.h"
 #import "ARContact.h"
 #import "ARNote.h"
 #import "ARSingleSectionDataSource.h"
+#import "ARNoteViewModel.h"
+#import "ARAnnotationViewModel.h"
 
-@interface ARContactDetailViewController () <ARNotesDataSourceDelegate>
+@interface ARContactDetailViewController () <ARDataSourceDelegate>
 
 @property (nonatomic, strong) ARContact *contact;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSArray<ARSingleSectionDataSource *> *dataSources;
 
-@property (nonatomic, strong) ARNotesDataSource *notesDatasource;
+@property (nonatomic, strong) ARKeyValueDataSource *notesDatasource;
+@property (nonatomic, strong) ARKeyValueDataSource *annotationsDataSource;
 
 @end
 
@@ -33,12 +38,24 @@
     self.contact = contact;
     self.date = date;
 
-    NSArray *notes = @[];
-    self.notesDatasource = [[ARNotesDataSource alloc] initWithNotes:notes];
+    self.notesDatasource = [[ARKeyValueDataSource alloc] initWithViewModels:@[]];
     _notesDatasource.delegate = self;
-    [[[contact.notes query] findObjectsInBackground] continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {
+
+    self.annotationsDataSource = [[ARKeyValueDataSource alloc] initWithViewModels:@[]];
+    _annotationsDataSource.delegate = self;
+
+    [[[[contact.notes query] findObjectsInBackground] continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {
       NSArray<ARNote *> *notes = t.result;
       NSCalendar* calendar = [NSCalendar currentCalendar];
+
+      // Sort the notes.
+      notes = [notes sortedArrayUsingComparator:^NSComparisonResult(ARNote *obj1, ARNote *obj2) {
+        return [calendar compareDate:obj2.date toDate:obj1.date toUnitGranularity:NSCalendarUnitDay];
+      }];
+
+      NSMutableArray<ARNoteViewModel *> *noteViewModels = [NSMutableArray arrayWithArray:_.array(notes).map(^(ARNote *note) {
+        return [[ARNoteViewModel alloc] initWithType:ARKeyValueViewModelTypeExisting object:note parentObject:_contact relation:_contact.notes];
+      }).unwrap];
 
       // If there's not already a note for this day, then add one.
       BOOL hasToday = NO;
@@ -50,25 +67,32 @@
       }
       if (!hasToday) {
         ARNote *todayNote = [ARNote noteForContact:_contact withText:@"" date:_date];
-        notes = [notes arrayByAddingObject:todayNote];
+        [noteViewModels insertObject:[[ARNoteViewModel alloc] initWithType:ARKeyValueViewModelTypeNew object:todayNote parentObject:_contact relation:_contact.notes] atIndex:0];
       }
 
-      // Sort the notes.
-      notes = [notes sortedArrayUsingComparator:^NSComparisonResult(ARNote *obj1, ARNote *obj2) {
-        return [calendar compareDate:obj2.date toDate:obj1.date toUnitGranularity:NSCalendarUnitDay];
-      }];
+      _notesDatasource.viewModels = noteViewModels;
 
-      _notesDatasource.notes = notes;
+      return [[contact.annotations query] findObjectsInBackground];
+    }] continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {
+      NSArray<ARAnnotation *> *annotations = t.result;
+      NSMutableArray<ARAnnotationViewModel *> *annotationViewModels = [annotations mutableCopy];
+
+      // Always insert an empty one.
+      [annotationViewModels addObject:[[ARAnnotationViewModel alloc] initWithType:ARKeyValueViewModelTypeNew object:[ARAnnotation annotationForContact:_contact withKey:nil value:nil] parentObject:_contact relation:_contact.annotations]];
+
+      _annotationsDataSource.viewModels = annotationViewModels;
 
       dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
       });
+
       return nil;
     }];
 
     self.dataSources = @[
                          [[ARContactHeaderDataSource alloc] initWithContact:self.contact],
-                         _notesDatasource
+                         _notesDatasource,
+                         _annotationsDataSource,
                          ];
   }
   return self;
@@ -97,8 +121,15 @@
   return [dataSource tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
-- (void)dataSourceCellsHeightChanged:(ARNotesDataSource *)dataSource
+- (void)dataSourceCellsHeightChanged:(ARSingleSectionDataSource *)dataSource
 {
+  [self.tableView beginUpdates];
+  [self.tableView endUpdates];
+}
+
+- (void)dataSourceDataChanged:(ARSingleSectionDataSource *)dataSource
+{
+  // TODO: something cleaner here.
   [self.tableView beginUpdates];
   [self.tableView endUpdates];
 }

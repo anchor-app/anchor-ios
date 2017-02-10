@@ -17,14 +17,11 @@
 		0A52FF6A1E42886900188E59 /* ARNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF691E42886900188E59 /* ARNote.m */; };
 		0A52FF6D1E4288F500188E59 /* ARAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF6C1E4288F500188E59 /* ARAnnotation.m */; };
 		0A52FF6F1E428F4400188E59 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A52FF6E1E428F4400188E59 /* Launch Screen.storyboard */; };
-		0A52FF781E4294CD00188E59 /* ARNotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF711E4294CD00188E59 /* ARNotesDataSource.m */; };
 		0A52FF791E4294CD00188E59 /* ARContactHeaderDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF731E4294CD00188E59 /* ARContactHeaderDataSource.m */; };
 		0A52FF7A1E4294CD00188E59 /* ARContactHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF751E4294CD00188E59 /* ARContactHeaderTableViewCell.m */; };
 		0A52FF7B1E4294CD00188E59 /* ARContactDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF771E4294CD00188E59 /* ARContactDetailViewController.m */; };
 		0A52FF7E1E429C0600188E59 /* ARSingleSectionDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF7D1E429C0600188E59 /* ARSingleSectionDataSource.m */; };
-		0A52FF811E429DCD00188E59 /* ARNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF801E429DCD00188E59 /* ARNoteTableViewCell.m */; };
-		0A52FF841E42A2CE00188E59 /* ARAnnotationsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF831E42A2CE00188E59 /* ARAnnotationsDataSource.m */; };
-		0A52FF871E42A38C00188E59 /* ARAnnotationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF861E42A38C00188E59 /* ARAnnotationTableViewCell.m */; };
+		0A52FF811E429DCD00188E59 /* ARKeyValueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF801E429DCD00188E59 /* ARKeyValueTableViewCell.m */; };
 		0A52FF8B1E42B22700188E59 /* ARDatePagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */; };
 		0AAC39A71E24727400065DFD /* ARCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A61E24727400065DFD /* ARCalendarManager.m */; };
 		0AAC39AA1E2550CE00065DFD /* AREvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A91E2550CE00065DFD /* AREvent.m */; };
@@ -33,6 +30,11 @@
 		0AAC39B91E2ECC2100065DFD /* ARSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39B81E2ECC2100065DFD /* ARSettingsViewController.m */; };
 		0ABFFAD41E3314F500EF98F0 /* ARUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABFFAD31E3314F500EF98F0 /* ARUser.m */; };
 		0ABFFAD81E33176500EF98F0 /* ARFullContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABFFAD71E33176500EF98F0 /* ARFullContact.m */; };
+		0AF5FD5D1E4B696200E67A1B /* ARKeySelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5FD5C1E4B696200E67A1B /* ARKeySelectorView.m */; };
+		0AF5FD601E4BB5F500E67A1B /* ARKeyValueDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5FD5F1E4BB5F500E67A1B /* ARKeyValueDataSource.m */; };
+		0AF5FD631E4BB71100E67A1B /* ARKeyValueViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5FD621E4BB71100E67A1B /* ARKeyValueViewModel.m */; };
+		0AF5FD661E4BBB2D00E67A1B /* ARAnnotationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5FD651E4BBB2D00E67A1B /* ARAnnotationViewModel.m */; };
+		0AF5FD691E4BBC1700E67A1B /* ARNoteViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5FD681E4BBC1700E67A1B /* ARNoteViewModel.m */; };
 		3573ECB7A4DAC108457C2106 /* libPods-Anchor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15DCA2252DEE97E6655B8BD7 /* libPods-Anchor.a */; };
 		C43F8601FD5E3530F00E5A19 /* libPods-AnchorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDD9B17758A4F0EFBDDFF95F /* libPods-AnchorTests.a */; };
 		ED5F65AE934C60B871CB25F7 /* libPods-AnchorUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E96D1B1EF2DFB40C7462D361 /* libPods-AnchorUITests.a */; };
@@ -79,8 +81,6 @@
 		0A52FF6B1E4288F500188E59 /* ARAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARAnnotation.h; sourceTree = "<group>"; };
 		0A52FF6C1E4288F500188E59 /* ARAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARAnnotation.m; sourceTree = "<group>"; };
 		0A52FF6E1E428F4400188E59 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		0A52FF701E4294CD00188E59 /* ARNotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARNotesDataSource.h; sourceTree = "<group>"; };
-		0A52FF711E4294CD00188E59 /* ARNotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARNotesDataSource.m; sourceTree = "<group>"; };
 		0A52FF721E4294CD00188E59 /* ARContactHeaderDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARContactHeaderDataSource.h; sourceTree = "<group>"; };
 		0A52FF731E4294CD00188E59 /* ARContactHeaderDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARContactHeaderDataSource.m; sourceTree = "<group>"; };
 		0A52FF741E4294CD00188E59 /* ARContactHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARContactHeaderTableViewCell.h; sourceTree = "<group>"; };
@@ -89,12 +89,8 @@
 		0A52FF771E4294CD00188E59 /* ARContactDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARContactDetailViewController.m; sourceTree = "<group>"; };
 		0A52FF7C1E429C0600188E59 /* ARSingleSectionDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSingleSectionDataSource.h; sourceTree = "<group>"; };
 		0A52FF7D1E429C0600188E59 /* ARSingleSectionDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSingleSectionDataSource.m; sourceTree = "<group>"; };
-		0A52FF7F1E429DCD00188E59 /* ARNoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARNoteTableViewCell.h; sourceTree = "<group>"; };
-		0A52FF801E429DCD00188E59 /* ARNoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARNoteTableViewCell.m; sourceTree = "<group>"; };
-		0A52FF821E42A2CE00188E59 /* ARAnnotationsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARAnnotationsDataSource.h; sourceTree = "<group>"; };
-		0A52FF831E42A2CE00188E59 /* ARAnnotationsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARAnnotationsDataSource.m; sourceTree = "<group>"; };
-		0A52FF851E42A38C00188E59 /* ARAnnotationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARAnnotationTableViewCell.h; sourceTree = "<group>"; };
-		0A52FF861E42A38C00188E59 /* ARAnnotationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARAnnotationTableViewCell.m; sourceTree = "<group>"; };
+		0A52FF7F1E429DCD00188E59 /* ARKeyValueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARKeyValueTableViewCell.h; sourceTree = "<group>"; };
+		0A52FF801E429DCD00188E59 /* ARKeyValueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARKeyValueTableViewCell.m; sourceTree = "<group>"; };
 		0A52FF891E42B22700188E59 /* ARDatePagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDatePagingView.h; sourceTree = "<group>"; };
 		0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDatePagingView.m; sourceTree = "<group>"; };
 		0AAC39A51E24727400065DFD /* ARCalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ARCalendarManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -112,6 +108,16 @@
 		0ABFFAD31E3314F500EF98F0 /* ARUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARUser.m; sourceTree = "<group>"; };
 		0ABFFAD61E33176500EF98F0 /* ARFullContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFullContact.h; sourceTree = "<group>"; };
 		0ABFFAD71E33176500EF98F0 /* ARFullContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFullContact.m; sourceTree = "<group>"; };
+		0AF5FD5B1E4B696200E67A1B /* ARKeySelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARKeySelectorView.h; sourceTree = "<group>"; };
+		0AF5FD5C1E4B696200E67A1B /* ARKeySelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARKeySelectorView.m; sourceTree = "<group>"; };
+		0AF5FD5E1E4BB5F500E67A1B /* ARKeyValueDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARKeyValueDataSource.h; sourceTree = "<group>"; };
+		0AF5FD5F1E4BB5F500E67A1B /* ARKeyValueDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARKeyValueDataSource.m; sourceTree = "<group>"; };
+		0AF5FD611E4BB71100E67A1B /* ARKeyValueViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARKeyValueViewModel.h; sourceTree = "<group>"; };
+		0AF5FD621E4BB71100E67A1B /* ARKeyValueViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARKeyValueViewModel.m; sourceTree = "<group>"; };
+		0AF5FD641E4BBB2D00E67A1B /* ARAnnotationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARAnnotationViewModel.h; sourceTree = "<group>"; };
+		0AF5FD651E4BBB2D00E67A1B /* ARAnnotationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARAnnotationViewModel.m; sourceTree = "<group>"; };
+		0AF5FD671E4BBC1700E67A1B /* ARNoteViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARNoteViewModel.h; sourceTree = "<group>"; };
+		0AF5FD681E4BBC1700E67A1B /* ARNoteViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARNoteViewModel.m; sourceTree = "<group>"; };
 		15DCA2252DEE97E6655B8BD7 /* libPods-Anchor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Anchor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35F42672F242161C0757CA69 /* Pods-Anchor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anchor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Anchor/Pods-Anchor.debug.xcconfig"; sourceTree = "<group>"; };
 		4325CFC0E4C8BBCCA9826994 /* Pods-Anchor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anchor.release.xcconfig"; path = "Pods/Target Support Files/Pods-Anchor/Pods-Anchor.release.xcconfig"; sourceTree = "<group>"; };
@@ -245,12 +251,10 @@
 		0A52FF8D1E42C07700188E59 /* Data Sources */ = {
 			isa = PBXGroup;
 			children = (
-				0A52FF701E4294CD00188E59 /* ARNotesDataSource.h */,
-				0A52FF711E4294CD00188E59 /* ARNotesDataSource.m */,
 				0A52FF721E4294CD00188E59 /* ARContactHeaderDataSource.h */,
 				0A52FF731E4294CD00188E59 /* ARContactHeaderDataSource.m */,
-				0A52FF821E42A2CE00188E59 /* ARAnnotationsDataSource.h */,
-				0A52FF831E42A2CE00188E59 /* ARAnnotationsDataSource.m */,
+				0AF5FD5E1E4BB5F500E67A1B /* ARKeyValueDataSource.h */,
+				0AF5FD5F1E4BB5F500E67A1B /* ARKeyValueDataSource.m */,
 			);
 			name = "Data Sources";
 			sourceTree = "<group>";
@@ -258,12 +262,18 @@
 		0A52FF8E1E42C0A100188E59 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0AF5FD611E4BB71100E67A1B /* ARKeyValueViewModel.h */,
+				0AF5FD621E4BB71100E67A1B /* ARKeyValueViewModel.m */,
 				0A52FF741E4294CD00188E59 /* ARContactHeaderTableViewCell.h */,
 				0A52FF751E4294CD00188E59 /* ARContactHeaderTableViewCell.m */,
-				0A52FF7F1E429DCD00188E59 /* ARNoteTableViewCell.h */,
-				0A52FF801E429DCD00188E59 /* ARNoteTableViewCell.m */,
-				0A52FF851E42A38C00188E59 /* ARAnnotationTableViewCell.h */,
-				0A52FF861E42A38C00188E59 /* ARAnnotationTableViewCell.m */,
+				0A52FF7F1E429DCD00188E59 /* ARKeyValueTableViewCell.h */,
+				0A52FF801E429DCD00188E59 /* ARKeyValueTableViewCell.m */,
+				0AF5FD5B1E4B696200E67A1B /* ARKeySelectorView.h */,
+				0AF5FD5C1E4B696200E67A1B /* ARKeySelectorView.m */,
+				0AF5FD641E4BBB2D00E67A1B /* ARAnnotationViewModel.h */,
+				0AF5FD651E4BBB2D00E67A1B /* ARAnnotationViewModel.m */,
+				0AF5FD671E4BBC1700E67A1B /* ARNoteViewModel.h */,
+				0AF5FD681E4BBC1700E67A1B /* ARNoteViewModel.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -634,14 +644,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A52FF811E429DCD00188E59 /* ARNoteTableViewCell.m in Sources */,
+				0A52FF811E429DCD00188E59 /* ARKeyValueTableViewCell.m in Sources */,
 				0AAC39AA1E2550CE00065DFD /* AREvent.m in Sources */,
+				0AF5FD661E4BBB2D00E67A1B /* ARAnnotationViewModel.m in Sources */,
 				0A331D531E44F4690067C5DF /* ARLogViewerViewController.m in Sources */,
+				0AF5FD5D1E4B696200E67A1B /* ARKeySelectorView.m in Sources */,
 				0A2CA0FF1E24026D00A583A3 /* ARScheduleViewController.m in Sources */,
-				0A52FF871E42A38C00188E59 /* ARAnnotationTableViewCell.m in Sources */,
+				0AF5FD601E4BB5F500E67A1B /* ARKeyValueDataSource.m in Sources */,
 				0ABFFAD81E33176500EF98F0 /* ARFullContact.m in Sources */,
+				0AF5FD691E4BBC1700E67A1B /* ARNoteViewModel.m in Sources */,
 				0AAC39B41E2C908200065DFD /* ARSchedule.m in Sources */,
 				0AAC39B91E2ECC2100065DFD /* ARSettingsViewController.m in Sources */,
+				0AF5FD631E4BB71100E67A1B /* ARKeyValueViewModel.m in Sources */,
 				0A2CA0FC1E24026D00A583A3 /* AppDelegate.m in Sources */,
 				0AAC39A71E24727400065DFD /* ARCalendarManager.m in Sources */,
 				0A52FF6A1E42886900188E59 /* ARNote.m in Sources */,
@@ -650,10 +664,8 @@
 				0A52FF7E1E429C0600188E59 /* ARSingleSectionDataSource.m in Sources */,
 				0ABFFAD41E3314F500EF98F0 /* ARUser.m in Sources */,
 				0A52FF7B1E4294CD00188E59 /* ARContactDetailViewController.m in Sources */,
-				0A52FF841E42A2CE00188E59 /* ARAnnotationsDataSource.m in Sources */,
 				0A2CA0F91E24026D00A583A3 /* main.m in Sources */,
 				0A52FF6D1E4288F500188E59 /* ARAnnotation.m in Sources */,
-				0A52FF781E4294CD00188E59 /* ARNotesDataSource.m in Sources */,
 				0A52FF7A1E4294CD00188E59 /* ARContactHeaderTableViewCell.m in Sources */,
 				0A52FF8B1E42B22700188E59 /* ARDatePagingView.m in Sources */,
 			);

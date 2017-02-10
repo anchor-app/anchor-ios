@@ -13,8 +13,8 @@
 @interface ARAnnotation : PFObject <PFSubclassing>
 
 @property (nonatomic, readonly, strong) ARContact *contact;
-@property (nonatomic, readonly, copy) NSString *key;
-@property (nonatomic, readonly, copy) NSString *value;
+@property (nonatomic, copy) NSString *key;
+@property (nonatomic, copy) NSString *value;
 
 + (instancetype)annotationForContact:(ARContact *)contact withKey:(NSString *)key value:(NSString *)value;
 

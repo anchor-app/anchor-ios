@@ -10,6 +10,15 @@
 
 #import <UIKit/UITableViewController.h>
 
+@class ARSingleSectionDataSource;
+
+@protocol ARDataSourceDelegate
+
+- (void)dataSourceCellsHeightChanged:(ARSingleSectionDataSource *)dataSource;
+- (void)dataSourceDataChanged:(ARSingleSectionDataSource *)dataSource;
+
+@end
+
 @interface ARSingleSectionDataSource : NSObject <UITableViewDataSource>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;

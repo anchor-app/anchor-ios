@@ -11,8 +11,6 @@
 @interface ARAnnotation ()
 
 @property (nonatomic, strong) ARContact *contact;
-@property (nonatomic, copy) NSString *key;
-@property (nonatomic, copy) NSString *value;
 
 @end
 
