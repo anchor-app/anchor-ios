@@ -11,10 +11,12 @@
 #import "AREvent.h"
 #import "ARContact.h"
 #import "ARContactDetailViewController.h"
+#import "AREventViewModel.h"
 
 @interface AREventDataSource ()
 
 @property (nonatomic, strong) AREvent *event;
+@property (nonatomic, strong) AREventViewModel *viewModel;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) NSDateFormatter *startTimeFormatter;
@@ -30,6 +32,8 @@
     self.date = date;
     self.navigationController = navigationController;
 
+    self.viewModel = [[AREventViewModel alloc] initWithEvent:_event];
+
     self.startTimeFormatter = [[NSDateFormatter alloc] init];
     [self.startTimeFormatter setDateStyle:NSDateFormatterNoStyle];
     [self.startTimeFormatter setTimeStyle:NSDateFormatterShortStyle];
@@ -39,7 +43,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return _event.participants.count;
+  return _viewModel.eventSubItemViewModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -50,14 +54,25 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
   }
 
-  ARContact *participant = _event.participants[indexPath.row];
+  AREventSubItemViewModel *vm = _viewModel.eventSubItemViewModels[indexPath.row];
 
-  if (participant.createdAt == nil) {
-    cell.textLabel.text = participant.emails[0];
-    cell.accessoryType = UITableViewCellAccessoryNone;
-  } else {
-    cell.textLabel.text = participant.fullName;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  switch (vm.type) {
+    case AREventSubItemViewModelTypeContact:
+      cell.textLabel.text = vm.contact.fullName;
+      cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+      break;
+    case AREventSubItemViewModelTypeNewContact:
+      cell.textLabel.text = vm.contact.emails[0];
+      cell.accessoryType = UITableViewCellAccessoryNone;
+      break;
+    case AREventSubItemViewModelTypeCollapseButton:
+      cell.textLabel.text = @"See Less Unknown Contacts";
+      cell.accessoryType = UITableViewCellAccessoryNone;
+      break;
+    case AREventSubItemViewModelTypeExpandButton:
+      cell.textLabel.text = @"See More Unknown Contacts";
+      cell.accessoryType = UITableViewCellAccessoryNone;
+      break;
   }
 
   return cell;
@@ -75,11 +90,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  ARContact *participant = _event.participants[indexPath.row];
+  AREventSubItemViewModel *vm = _viewModel.eventSubItemViewModels[indexPath.row];
 
-  if (participant.createdAt != nil) {
-    ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:participant date:_date];
-    [_navigationController pushViewController:vc animated:YES];
+  switch (vm.type) {
+    case AREventSubItemViewModelTypeContact:
+    {
+      ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:vm.contact date:_date];
+      [_navigationController pushViewController:vc animated:YES];
+      break;
+    }
+    case AREventSubItemViewModelTypeNewContact:
+      break;
+    case AREventSubItemViewModelTypeCollapseButton:
+      _viewModel.state = AREventViewModelStateCollapsed;
+      [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+      break;
+    case AREventSubItemViewModelTypeExpandButton:
+      _viewModel.state = AREventViewModelStateExpanded;
+      [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+      break;
   }
 }
 
