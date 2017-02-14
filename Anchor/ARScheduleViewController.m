@@ -17,14 +17,16 @@
 #import "ARCalendarManager.h"
 #import "ARSettingsViewController.h"
 #import "ARDatePagingView.h"
+#import "ARSingleSectionDataSource.h"
+#import "AREventDataSource.h"
 
 @interface ARScheduleViewController () <UITableViewDelegate, UITableViewDataSource, ARDatePagingViewDelegate>
 
 @property (nonatomic, strong) ARCalendarManager *calendarManager;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ARSchedule *schedule;
+@property (nonatomic, strong) NSMutableArray *dataSources;
 @property (nonatomic, strong) NSDate *date;
-@property (nonatomic, strong) NSDateFormatter *startTimeFormatter;
 @property (nonatomic, strong) UINavigationController *settingsController;
 @property (nonatomic, strong) ARDatePagingView *datePagingView;
 @property (nonatomic, strong) UIView *loadingView;
@@ -39,10 +41,6 @@
   if (self = [super init]) {
     self.calendarManager = calendarManager;
     self.date = date;
-
-    self.startTimeFormatter = [[NSDateFormatter alloc] init];
-    [self.startTimeFormatter setDateStyle:NSDateFormatterNoStyle];
-    [self.startTimeFormatter setTimeStyle:NSDateFormatterShortStyle];
   }
   return self;
 }
@@ -106,58 +104,27 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return _schedule.events.count;
+  return _dataSources.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  AREvent *e = [_schedule.events objectAtIndex:section];
-  return e.participants.count;
+  return [_dataSources[section] tableView:tableView numberOfRowsInSection:0];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSString *identifier = @"ARScheduleViewControllerContactCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-  if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-  }
-
-  AREvent *event = [_schedule.events objectAtIndex:indexPath.section];
-  ARContact *participant = event.participants[indexPath.row];
-
-  if (participant.createdAt == nil) {
-    cell.textLabel.text = participant.emails[0];
-    cell.accessoryType = UITableViewCellAccessoryNone;
-  } else {
-    cell.textLabel.text = participant.fullName;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  }
-
-  return cell;
+  return [_dataSources[indexPath.section] tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-  AREvent *e = [_schedule.events objectAtIndex:section];
-
-  NSTimeInterval duration = [e.underlyingEvent.endDate timeIntervalSinceDate:e.underlyingEvent.startDate];
-  NSString *title = [NSString stringWithFormat:@"%@ (%ld min) %@",
-                     [self.startTimeFormatter stringFromDate:e.underlyingEvent.startDate],
-                     (long)(duration / 60),
-                     e.underlyingEvent.title];
-  return title;
+  return [_dataSources[section] tableView:tableView titleForHeaderInSection:0];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  AREvent *event = [_schedule.events objectAtIndex:indexPath.section];
-  ARContact *participant = event.participants[indexPath.row];
-
-  if (participant.createdAt != nil) {
-    ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:participant date:_date];
-    [self.navigationController pushViewController:vc animated:YES];
-  }
+  [_dataSources[indexPath.section] tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 - (void)setDate:(NSDate *)date
@@ -177,9 +144,8 @@
       DDLogInfo(@"Loaded schedule for date %@: events(%lu) contacts(%lu)", _date, (unsigned long)_schedule.events.count, (unsigned long)_schedule.contacts.count);
 
       dispatch_async(dispatch_get_main_queue(), ^{
-        _schedule = t.result;
+        self.schedule = t.result;
         [self _setLoading:NO];
-        [_tableView reloadData];
       });
       return nil;
     }];
@@ -201,6 +167,21 @@
 - (void)datePagingView:(ARDatePagingView *)view didChangeToDate:(NSDate *)date
 {
   self.date = date;
+}
+
+- (void)setSchedule:(ARSchedule *)schedule
+{
+  if (_schedule != schedule) {
+    _schedule = schedule;
+
+    // Generate the next set of datasources.
+    _dataSources = [NSMutableArray arrayWithArray:_.array(_schedule.events).map(^id(AREvent * event) {
+      AREventDataSource *ds = [[AREventDataSource alloc] initWithEvent:event date:_date navigationController:self.navigationController];
+      return ds;
+    }).unwrap];
+
+    [_tableView reloadData];
+  }
 }
 
 @end
