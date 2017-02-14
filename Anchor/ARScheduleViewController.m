@@ -124,15 +124,13 @@
   }
 
   AREvent *event = [_schedule.events objectAtIndex:indexPath.section];
-  NSString *email = [event emailAtIndex:indexPath.row];
-  id contactOrNull = [event contactOrNullAtIndex:indexPath.row];
+  ARContact *participant = event.participants[indexPath.row];
 
-  if ([contactOrNull isEqual:[NSNull null]]) {
-    cell.textLabel.text = email;
+  if (participant.createdAt == nil) {
+    cell.textLabel.text = participant.emails[0];
     cell.accessoryType = UITableViewCellAccessoryNone;
   } else {
-    ARContact *contact = (ARContact *)contactOrNull;
-    cell.textLabel.text = contact.fullName;
+    cell.textLabel.text = participant.fullName;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
 
@@ -154,11 +152,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   AREvent *event = [_schedule.events objectAtIndex:indexPath.section];
-  id contactOrNull = [event contactOrNullAtIndex:indexPath.row];
+  ARContact *participant = event.participants[indexPath.row];
 
-  if (![contactOrNull isEqual:[NSNull null]]) {
-    ARContact *contact = (ARContact *)contactOrNull;
-    ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:contact date:_date];
+  if (participant.createdAt != nil) {
+    ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:participant date:_date];
     [self.navigationController pushViewController:vc animated:YES];
   }
 }

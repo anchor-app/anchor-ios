@@ -209,21 +209,20 @@
     NSMutableArray<AREvent *> *events = [NSMutableArray array];
     for (EKEvent *event in underlyingEvents) {
       NSArray<NSString *> *emailsInEvent = eventEmailsIndex[event.eventIdentifier];
-      NSMutableDictionary<NSString *, id> *eventContacts = [NSMutableDictionary dictionary];
+      NSMutableArray<ARContact *> *contactsInEvent = [NSMutableArray array];
       for (NSString *email in emailsInEvent) {
         // If we found a Contact object for this email, record that, otherwise
-        // mark that email with a reference to NSNull so we can see downstream that
-        // we didnt find one.
+        // create a new Contact with just the email.
         ARContact *contact = emailContactIndex[email];
         if (contact) {
           [contacts addObject:contact];
-          eventContacts[email] = contact;
+          [contactsInEvent addObject:contact];
         } else {
-          eventContacts[email] = [NSNull null];
+          [contactsInEvent addObject:[ARContact contactWithFullName:@"" emails:@[email]]];
         }
       }
 
-     AREvent *e = [AREvent eventWithParticipants:eventContacts underlyingEvent:event];
+      AREvent *e = [AREvent eventWithParticipants:contactsInEvent underlyingEvent:event];
       [events addObject:e];
     }
 

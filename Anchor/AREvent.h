@@ -9,19 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @class EKEvent;
+@class ARContact;
 
 /**
  Designed for local storage.
  */
 @interface AREvent : NSObject
 
-// email -> Contact or NSNull
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> *participants;
+@property (nonatomic, readonly, copy) NSArray<ARContact *> *participants;
 @property (nonatomic, readonly, strong) EKEvent *underlyingEvent;
 
-+ (instancetype)eventWithParticipants:(NSDictionary<NSString *, id> *)participants underlyingEvent:(EKEvent *)underlyingEvent;
-
-- (NSString *)emailAtIndex:(NSInteger)index;
-- (id)contactOrNullAtIndex:(NSInteger)index;
++ (instancetype)eventWithParticipants:(NSArray<ARContact *> *)participants underlyingEvent:(EKEvent *)underlyingEvent;
 
 @end
