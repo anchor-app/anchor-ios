@@ -10,11 +10,13 @@
 
 @class DDFileLogger;
 @class ARFullContact;
+@class ARKeyManager;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) DDFileLogger *fileLogger;
+@property (nonatomic, strong) ARKeyManager *keyManager;
 
 
 /**

@@ -14,8 +14,7 @@
 
 @protocol ARKeyValueTableViewCellDelegate
 
-- (void)cell:(ARKeyValueTableViewCell *)cell viewModel:(ARKeyValueViewModel *)viewModel keyDidChange:(ARKeySelectorView *)keySelectorView;
-- (void)cell:(ARKeyValueTableViewCell *)cell viewModel:(ARKeyValueViewModel *)viewModel valueDidChange:(UITextView *)valueTextView;
+- (void)cell:(ARKeyValueTableViewCell *)cell viewModelDidChange:(ARKeyValueViewModel *)viewModel key:(NSString *)key value:(NSString *)value;
 - (void)cell:(ARKeyValueTableViewCell *)cell didDeleteViewModel:(ARKeyValueViewModel *)viewModel;
 - (void)cell:(ARKeyValueTableViewCell *)cell didTapKeySelectorForViewModel:(ARKeyValueViewModel *)viewModel;
 

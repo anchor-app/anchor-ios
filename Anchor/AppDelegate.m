@@ -15,6 +15,7 @@
 #import "ARUser.h"
 #import "ARCalendarManager.h"
 #import "ARScheduleViewController.h"
+#import "ARKeyManager.h"
 
 NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
 
@@ -68,6 +69,8 @@ NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
     logInViewController.delegate = self;
     [_navigationController presentViewController:logInViewController animated:YES completion:nil];
   }
+
+  self.keyManager = [[ARKeyManager alloc] init];
 
   return YES;
 }

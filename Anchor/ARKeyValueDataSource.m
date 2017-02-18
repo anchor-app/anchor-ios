@@ -8,20 +8,29 @@
 
 #import "ARKeyValueDataSource.h"
 
+#import <UIKit/UIKit.h>
+
 #import "ARKeyValueTableViewCell.h"
 #import "ARKeyValueViewModel.h"
 #import "ARKeySelectorView.h"
+#import "ARKeyManager.h"
+#import "ARKeySelectionViewController.h"
 
-@interface ARKeyValueDataSource () <ARKeyValueTableViewCellDelegate>
+@interface ARKeyValueDataSource () <ARKeyValueTableViewCellDelegate, ARKeySelectionViewControllerDelegate>
+
+@property (nonatomic, strong) ARKeyManager *keyManager;
+@property (nonatomic, strong) UIViewController *viewController;
 
 @end
 
 @implementation ARKeyValueDataSource
 
-- (instancetype)initWithViewModels:(NSArray<ARKeyValueViewModel *> *)viewModels;
+- (instancetype)initWithViewModels:(NSArray<ARKeyValueViewModel *> *)viewModels keyManager:(ARKeyManager *)keyManager viewController:(UIViewController *)viewController
 {
   if (self = [super init]) {
     self.viewModels = viewModels;
+    self.keyManager = keyManager;
+    self.viewController = viewController;
   }
   return self;
 }
@@ -67,10 +76,6 @@
       }];
 
       vm.type = ARKeyValueViewModelTypeExisting;
-
-      if (_delegate) {
-        [_delegate dataSourceDataChanged:self];
-      }
       break;
     }
     case ARKeyValueViewModelTypeExisting:
@@ -95,31 +100,47 @@
   }
 }
 
-- (void)cell:(ARKeyValueTableViewCell *)cell viewModel:(ARKeyValueViewModel *)viewModel keyDidChange:(ARKeySelectorView *)keySelectorView
+- (void)cell:(ARKeyValueTableViewCell *)cell viewModelDidChange:(ARKeyValueViewModel *)viewModel key:(NSString *)key value:(NSString *)value
 {
+  if (key != nil) {
+    viewModel.key = key;
+  }
+  if (value != nil) {
+    viewModel.value = value;
+  }
+
   [self _upgradeViewModelIfNeeded:viewModel];
 
-  // This is probably super inefficient.
-  viewModel.key = keySelectorView.key;
-  [viewModel.object saveEventually];
-}
-
-- (void)cell:(ARKeyValueTableViewCell *)cell viewModel:(ARKeyValueViewModel *)viewModel valueDidChange:(UITextView *)valueTextView
-{
-  [self _upgradeViewModelIfNeeded:viewModel];
-
-  // This is probably super inefficient.
-  viewModel.value = valueTextView.text;
   [viewModel.object saveEventually];
 
-  if (_delegate) {
+  if (key != nil) {
+    [_delegate dataSourceDataChanged:self];
+  }
+
+  if (value != nil) {
     [_delegate dataSourceCellsHeightChanged:self];
   }
 }
 
 - (void)cell:(ARKeyValueTableViewCell *)cell didTapKeySelectorForViewModel:(ARKeyValueViewModel *)viewModel
 {
-  
+  ARKeySelectionViewController *vc = [_keyManager keySelectionViewControllerForViewModel:viewModel];
+  vc.delegate = self;
+  UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+  vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(_onKeySelectionCancel)];
+  [_viewController presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (void)_onKeySelectionCancel
+{
+  [_viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)keySelectionViewController:(ARKeySelectionViewController *)viewController didSelectKey:(NSString *)key forViewModel:(ARKeyValueViewModel *)viewModel;
+{
+  [_keyManager updateKeyCacheWithKey:key];
+  [self cell:nil viewModelDidChange:viewModel key:key value:nil];
+  [_viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -81,9 +81,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-  if (_delegate) {
-    [_delegate cell:self viewModel:_viewModel valueDidChange:textView];
-  }
+  [_delegate cell:self viewModelDidChange:_viewModel key:nil value:textView.text];
 }
 
 - (void)_onTapKeySelector:(UITapGestureRecognizer *)recognizer

@@ -11,10 +11,11 @@
 #import <UIKit/UITableViewController.h>
 
 @class ARKeyValueViewModel;
+@class ARKeyManager;
 
 @interface ARKeyValueDataSource : ARSingleSectionDataSource
 
-- (instancetype)initWithViewModels:(NSArray<ARKeyValueViewModel *> *)viewModels;
+- (instancetype)initWithViewModels:(NSArray<ARKeyValueViewModel *> *)viewModels keyManager:(ARKeyManager *)keyManager viewController:(UIViewController *)viewController;
 
 @property (nonatomic, copy) NSArray<ARKeyValueViewModel *> *viewModels;
 @property (nonatomic, weak) id<ARDataSourceDelegate> delegate;
