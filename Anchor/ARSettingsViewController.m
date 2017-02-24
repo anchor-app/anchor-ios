@@ -17,24 +17,24 @@
 #import "ARUser.h"
 #import "ARFullContact.h"
 #import "ARLogViewerViewController.h"
+#import "ARIntegrationsSettingsViewController.h"
 
 NS_ENUM(NSInteger) {
   SectionLogin,
-  SectionFullContact,
+  SectionIntegrations,
   SectionCache,
   SectionLogs,
   SectionCount,
 };
 
 NS_ENUM(NSInteger) {
-  RowLogin,
-  RowLoginCount,
+  RowIntegrations,
+  RowIntegrationsCount,
 };
 
 NS_ENUM(NSInteger) {
-  RowFullContactAuth,
-  RowFullContactSync,
-  RowFullContactCount,
+  RowLogin,
+  RowLoginCount,
 };
 
 NS_ENUM(NSInteger) {
@@ -48,7 +48,7 @@ NS_ENUM(NSInteger) {
   RowLogsCount,
 };
 
-@interface ARSettingsViewController () <PFLogInViewControllerDelegate>
+@interface ARSettingsViewController () <PFLogInViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
 @end
 
@@ -89,9 +89,9 @@ NS_ENUM(NSInteger) {
     {
       return RowLoginCount;
     }
-      case SectionFullContact:
+      case SectionIntegrations:
     {
-      return RowFullContactCount;
+      return RowIntegrationsCount;
     }
       case SectionCache:
     {
@@ -121,26 +121,17 @@ NS_ENUM(NSInteger) {
   }
 }
 
-- (void)_configureFullContactSectionCell:(UITableViewCell *)cell forRow:(NSInteger)row
+- (void)_configureIntegrationsCell:(UITableViewCell *)cell forRow:(NSInteger)row
 {
   cell.textLabel.textAlignment = NSTextAlignmentCenter;
-  switch (row) {
-      case RowFullContactAuth:
-    {
-      cell.textLabel.text = @"Authorize Full Contact";
-      break;
-    }
-      case RowFullContactSync:
-    {
-      cell.textLabel.text = @"Sync Contacts";
-      break;
-    }
-  }
+  cell.textLabel.text = @"Manage Integrations";
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 - (void)_configureCacheSectionCell:(UITableViewCell *)cell forRow:(NSInteger)row
 {
   cell.textLabel.textAlignment = NSTextAlignmentCenter;
+  cell.accessoryType = UITableViewCellAccessoryNone;
   switch (row) {
       case RowCacheClear:
     {
@@ -153,6 +144,7 @@ NS_ENUM(NSInteger) {
 - (void)_configureLogsSectionCell:(UITableViewCell *)cell forRow:(NSInteger)row
 {
   cell.textLabel.textAlignment = NSTextAlignmentCenter;
+  cell.accessoryType = UITableViewCellAccessoryNone;
   switch (row) {
       case RowLogsView:
     {
@@ -181,9 +173,9 @@ NS_ENUM(NSInteger) {
       [self _configureLoginSectionCell:cell forRow:indexPath.row];
       break;
     }
-      case SectionFullContact:
+      case SectionIntegrations:
     {
-      [self _configureFullContactSectionCell:cell forRow:indexPath.row];
+      [self _configureIntegrationsCell:cell forRow:indexPath.row];
       break;
     }
       case SectionCache:
@@ -218,61 +210,12 @@ NS_ENUM(NSInteger) {
       }
       break;
     }
-      case SectionFullContact:
+      case SectionIntegrations:
     {
       [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-      
-      switch (indexPath.row) {
-        case RowFullContactAuth:
-        {
-          ARUser *user = (ARUser *)[PFUser currentUser];
-          [user fetch];
 
-          if (!user.fullContactClientId || !user.fullContactClientSecret) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"You don't have a FullContact application client ID and/or secret attached to your Anchor user." preferredStyle:UIAlertControllerStyleAlert];
-
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                                  handler:^(UIAlertAction * action) {}];
-
-            [alert addAction:defaultAction];
-            [self presentViewController:alert animated:YES completion:nil];
-
-            break;
-          }
-          // TODO: invert this dependency w/ some kind of provider map solution.
-          AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-          [appDelegate.fullContact authenticateWithScope:@"contacts.read" completion:^(NSString *accessToken, NSString *refreshToken, NSError *error) {
-            if (error) {
-              DDLogError(@"Error authenticating with FullContact: %@", error);
-              [AFMInfoBanner showAndHideWithText:@"Error authenticating with FullContact" style:AFMInfoBannerStyleError];
-            } else {
-              user.fullContactAccessToken = accessToken;
-              user.fullContactResetToken = refreshToken;
-              [user saveEventually];
-
-              DDLogInfo(@"Successfully acquired FullContact accessToken(%@) refreshToken(%@)", accessToken, refreshToken);
-              [AFMInfoBanner showAndHideWithText:@"Authenticated with FullContact" style:AFMInfoBannerStyleInfo];
-            }
-          }];
-          break;
-        }
-        case RowFullContactSync:
-        {
-          DDLogInfo(@"Syncing FullContact contacts...");
-          [PFCloud callFunctionInBackground:@"sync" withParameters:nil block:^(NSString *message, NSError * _Nullable error) {
-            if (error) {
-              DDLogError(@"Error syncing FullContact contacts: %@", error);
-              [AFMInfoBanner showAndHideWithText:@"Error Syncing Contacts" style:AFMInfoBannerStyleError];
-            } else {
-              // To be safe, let's clear our local cache after this.
-              [self _clearCache];
-
-              [AFMInfoBanner showAndHideWithText:message style:AFMInfoBannerStyleInfo];
-            }
-          }];
-          break;
-        }
-      }
+      ARIntegrationsSettingsViewController *vc = [[ARIntegrationsSettingsViewController alloc] init];
+      [self.navigationController pushViewController:vc animated:YES];
       break;
     }
       case SectionLogs:
@@ -329,6 +272,7 @@ NS_ENUM(NSInteger) {
 {
   if ([MFMailComposeViewController canSendMail]) {
     MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+    mailViewController.mailComposeDelegate = self;
     [mailViewController setSubject:@"Anchor ⚓️ Log Data" ];
 
     NSData *allLogData = [self _logData];
@@ -358,6 +302,11 @@ NS_ENUM(NSInteger) {
 {
   [PFQuery clearAllCachedResults];
   DDLogInfo(@"Cleared local caches");
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

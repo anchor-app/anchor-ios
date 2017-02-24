@@ -49,4 +49,7 @@ typedef void (^ARFullContactAuthenticationCompletionBlock)(NSString *accessToken
  */
 - (void)authenticateWithScope:(NSString *)scope completion:(ARFullContactAuthenticationCompletionBlock)completion;
 
+@property (nonatomic, copy) NSString *clientId;
+@property (nonatomic, copy) NSString *clientSecret;
+
 @end

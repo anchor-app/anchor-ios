@@ -29,6 +29,8 @@
 		0A52FF811E429DCD00188E59 /* ARKeyValueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF801E429DCD00188E59 /* ARKeyValueTableViewCell.m */; };
 		0A52FF8B1E42B22700188E59 /* ARDatePagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */; };
 		0A76E6431E53E2BE0014494F /* ARKeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A76E6421E53E2BE0014494F /* ARKeyManager.m */; };
+		0A76E6461E57E4400014494F /* ARIntegrationsSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A76E6451E57E4400014494F /* ARIntegrationsSettingsViewController.m */; };
+		0A76E64A1E5D20C30014494F /* ARFullContactDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A76E6491E5D20C30014494F /* ARFullContactDataSource.m */; };
 		0AAC39A71E24727400065DFD /* ARCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A61E24727400065DFD /* ARCalendarManager.m */; };
 		0AAC39AA1E2550CE00065DFD /* AREvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39A91E2550CE00065DFD /* AREvent.m */; };
 		0AAC39AD1E25512800065DFD /* ARContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC39AC1E25512800065DFD /* ARContact.m */; };
@@ -111,6 +113,10 @@
 		0A52FF8A1E42B22700188E59 /* ARDatePagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDatePagingView.m; sourceTree = "<group>"; };
 		0A76E6411E53E2BE0014494F /* ARKeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARKeyManager.h; sourceTree = "<group>"; };
 		0A76E6421E53E2BE0014494F /* ARKeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARKeyManager.m; sourceTree = "<group>"; };
+		0A76E6441E57E4400014494F /* ARIntegrationsSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARIntegrationsSettingsViewController.h; sourceTree = "<group>"; };
+		0A76E6451E57E4400014494F /* ARIntegrationsSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARIntegrationsSettingsViewController.m; sourceTree = "<group>"; };
+		0A76E6481E5D20C30014494F /* ARFullContactDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFullContactDataSource.h; sourceTree = "<group>"; };
+		0A76E6491E5D20C30014494F /* ARFullContactDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFullContactDataSource.m; sourceTree = "<group>"; };
 		0AAC39A51E24727400065DFD /* ARCalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ARCalendarManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0AAC39A61E24727400065DFD /* ARCalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ARCalendarManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0AAC39A81E2550CE00065DFD /* AREvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AREvent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -346,12 +352,40 @@
 		0A52FF911E42C0E500188E59 /* Settings View */ = {
 			isa = PBXGroup;
 			children = (
+				0A76E6471E5CAEE60014494F /* Integrations */,
 				0AAC39B71E2ECC2100065DFD /* ARSettingsViewController.h */,
 				0AAC39B81E2ECC2100065DFD /* ARSettingsViewController.m */,
 				0A331D511E44F4690067C5DF /* ARLogViewerViewController.h */,
 				0A331D521E44F4690067C5DF /* ARLogViewerViewController.m */,
 			);
 			name = "Settings View";
+			sourceTree = "<group>";
+		};
+		0A76E6471E5CAEE60014494F /* Integrations */ = {
+			isa = PBXGroup;
+			children = (
+				0A76E64C1E6016240014494F /* Views */,
+				0A76E64B1E6016150014494F /* Data Sources */,
+				0A76E6441E57E4400014494F /* ARIntegrationsSettingsViewController.h */,
+				0A76E6451E57E4400014494F /* ARIntegrationsSettingsViewController.m */,
+			);
+			name = Integrations;
+			sourceTree = "<group>";
+		};
+		0A76E64B1E6016150014494F /* Data Sources */ = {
+			isa = PBXGroup;
+			children = (
+				0A76E6481E5D20C30014494F /* ARFullContactDataSource.h */,
+				0A76E6491E5D20C30014494F /* ARFullContactDataSource.m */,
+			);
+			name = "Data Sources";
+			sourceTree = "<group>";
+		};
+		0A76E64C1E6016240014494F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		0AAC39AE1E25512D00065DFD /* Models */ = {
@@ -697,10 +731,12 @@
 				0AF5FD5D1E4B696200E67A1B /* ARKeySelectorView.m in Sources */,
 				0A2CA0FF1E24026D00A583A3 /* ARScheduleViewController.m in Sources */,
 				0A3418071E53788400EA338A /* ARBaseKeySelectionTableViewController.m in Sources */,
+				0A76E64A1E5D20C30014494F /* ARFullContactDataSource.m in Sources */,
 				0A34180D1E5378E700EA338A /* ARKeySelectionViewController.m in Sources */,
 				0AF5FD601E4BB5F500E67A1B /* ARKeyValueDataSource.m in Sources */,
 				0A3418001E52961F00EA338A /* AREventDataSource.m in Sources */,
 				0A76E6431E53E2BE0014494F /* ARKeyManager.m in Sources */,
+				0A76E6461E57E4400014494F /* ARIntegrationsSettingsViewController.m in Sources */,
 				0ABFFAD81E33176500EF98F0 /* ARFullContact.m in Sources */,
 				0AF5FD691E4BBC1700E67A1B /* ARNoteViewModel.m in Sources */,
 				0AAC39B41E2C908200065DFD /* ARSchedule.m in Sources */,

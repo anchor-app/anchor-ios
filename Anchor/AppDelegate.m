@@ -112,14 +112,17 @@ NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
 
 - (ARFullContact *)fullContact
 {
+  ARUser *user = (ARUser *)[PFUser currentUser];
   if (!_fullContact) {
-    ARUser *user = (ARUser *)[PFUser currentUser];
     if (user.fullContactClientId && user.fullContactClientSecret) {
       self.fullContact = [[ARFullContact alloc] initWithClientId:user.fullContactClientId
                                                     clientSecret:user.fullContactClientSecret
                                                      redirectURI:@"anchor-fullcontact://redirect"];
     }
   }
+  // Be safe and update the clientID and clientSecret in case they changed.
+  _fullContact.clientId = user.fullContactClientId;
+  _fullContact.clientSecret = user.fullContactClientSecret;
   return _fullContact;
 }
 

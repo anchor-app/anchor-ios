@@ -13,8 +13,6 @@
 
 @interface ARFullContact ()
 
-@property (nonatomic, copy) NSString *clientId;
-@property (nonatomic, copy) NSString *clientSecret;
 @property (nonatomic, copy) NSString *redirectURI;
 
 @property (nonatomic, strong) NSMutableDictionary<NSString *, ARFullContactAuthenticationCompletionBlock> *authenticationAttempts;
