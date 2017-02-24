@@ -91,6 +91,7 @@
                                @"redirect_uri": _redirectURI,
                                };
 
+  [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
   [manager POST:@"https://api.fullcontact.com/v3/oauth.exchangeAuthCode" parameters:parameters progress:nil success:^(NSURLSessionTask *task, id responseObject) {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
       NSDictionary *dict = (NSDictionary *)responseObject;
