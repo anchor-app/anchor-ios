@@ -17,4 +17,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
 #import <Underscore.m/Underscore.h>
 #define _ Underscore
 
+#import "LocalSettings.h"
+
 #endif /* Anchor_h */

@@ -4,6 +4,16 @@
 
 ## Development Environment
 
+### Parse Setup
+The build process reads the Parse configuration from a `.env` file you place in the root directory with this format:
+```
+PARSE_APPLICATION_ID=<your application ID>
+PARSE_CLIENT_KEY=<your client key>
+PARSE_SERVER=<your server URL>
+```
+
+Be sure to set up this file before attempting to build.
+
 ## Usage
 
 ### Connecting to FullContact

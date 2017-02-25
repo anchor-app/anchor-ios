@@ -445,6 +445,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A2CA1211E24026D00A583A3 /* Build configuration list for PBXNativeTarget "Anchor" */;
 			buildPhases = (
+				0A76E64D1E60AC050014494F /* Set Parse Variables in plist */,
 				46B95433B2C34F87ADB4EF2A /* [CP] Check Pods Manifest.lock */,
 				0A2CA0F01E24026D00A583A3 /* Sources */,
 				0A2CA0F11E24026D00A583A3 /* Frameworks */,
@@ -582,6 +583,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A76E64D1E60AC050014494F /* Set Parse Variables in plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set Parse Variables in plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "HEADER=./Anchor/LocalSettings.h\nrm -f $HEADER\ntouch $HEADER\n\nif [ ! -f .env ]\nthen\n  echo \"error: Cannot find a .env file needed for build setup. See README.md\" > /dev/stderr\n  exit 1\nfi\n\nexport $(cat .env | grep -v '^#' | xargs)\n\nif [ -z $PARSE_APPLICATION_ID ]\nthen\necho \"error: PARSE_APPLICATION_ID not present in .env file\" > /dev/stderr\nexit 1\nfi\necho \"#define AR_PARSE_APPLICATION_ID @\\\"$PARSE_APPLICATION_ID\\\"\" >> $HEADER\n\nif [ -z $PARSE_CLIENT_KEY ]\nthen\necho \"error: PARSE_CLIENT_KEY not present in .env file\" > /dev/stderr\nexit 1\nfi\necho \"#define AR_PARSE_CLIENT_KEY @\\\"$PARSE_CLIENT_KEY\\\"\" >> $HEADER\n\nif [ -z $PARSE_SERVER ]\nthen\necho \"error: PARSE_SERVER not present in .env file\" > /dev/stderr\nexit 1\nfi\necho \"#define AR_PARSE_SERVER @\\\"$PARSE_SERVER\\\"\" >> $HEADER";
+			showEnvVarsInLog = 0;
+		};
 		1A3837835CBE4B617A9E7F6A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

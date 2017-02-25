@@ -1,3 +1,5 @@
 .DS_Store
 xcuserdata/
 *.un~
+.env
+Anchor/LocalSettings.h

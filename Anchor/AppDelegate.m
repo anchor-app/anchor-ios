@@ -17,12 +17,13 @@
 #import "ARScheduleViewController.h"
 #import "ARKeyManager.h"
 
-NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
+NSString *ARParseApplicationIdKey = @"ARParseApplicationId";
+NSString *ARParseClientKeyKey = @"ARParseClientKey";
+NSString *ARParseServerKey = @"ARParseServer";
 
 @interface AppDelegate () <PFLogInViewControllerDelegate>
 
 @property (nonatomic, strong) UINavigationController *navigationController;
-@property (nonatomic, strong) NSUserDefaults *userDefaults;
 @property (nonatomic, strong) ARCalendarManager *calendarManager;
 
 @end
@@ -31,14 +32,18 @@ NSString *CNGEDefaultsUserId = @"CNGEDefaultsUserId";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  NSString *applicationId = AR_PARSE_APPLICATION_ID;
+  NSString *clientKey = AR_PARSE_CLIENT_KEY;
+  NSString *server = AR_PARSE_SERVER;
+
   // Initialize Parse.
   [Parse enableLocalDatastore];
   [Parse initializeWithConfiguration:
    [ParseClientConfiguration
     configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-      configuration.applicationId = @"n8v4zJnqB3QQmcOQ0cvUDRlWOVSVzANTC9PNUUjd";
-      configuration.clientKey = @"2TiAeZRQTAyr6OX8K0VsVuCSCTbVdjArUNPSQ9bS";
-      configuration.server = @"https://pg-app-8hnin3szjcye8hhjecih9pxrjckzb2.scalabl.cloud/1/";
+      configuration.applicationId = applicationId;
+      configuration.clientKey = clientKey;
+      configuration.server = server;
     }]];
 
   // Set up logging.
