@@ -8,7 +8,6 @@
 
 #import <Parse/Parse.h>
 
-
 /**
  Subclass of PFUser, representing a user in our Anchor application. We store a few app-specific
  properties but otherwise use ARUser as you would use any PFUser object.
@@ -36,5 +35,18 @@
  Token with which to request another valid access token, once the access token has expired. See https://api.fullcontact.com/v3/docs/authentication/
  */
 @property (nonatomic, copy) NSString *fullContactResetToken;
+
+/**
+ Optional Parse role name which represents all the users in a "team".
+ */
+@property (nonatomic, copy) NSString *teamId;
+
+/**
+ Set up read/write permissions for an object, including team access.
+ TODO: this should probably be extracted into a permissions manager.
+ 
+ @param object Object to set permissions on.
+ */
+- (void)setPermissionsForObject:(PFObject *)object;
 
 @end

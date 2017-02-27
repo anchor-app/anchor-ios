@@ -31,3 +31,15 @@ To connect your FullContact app to Anchor:
 * You should see a green confirmation dialog at the top of the Anchor screen.
 
 You probably should explicitly sync your contacts at this point, using the Sync Contacts button on the same Manage Integrations screen.
+
+## Security
+
+You should familiarize yourself with Parse's security model by reading the blog articles starting at http://blog.parse.com/learn/engineering/parse-security-i-are-you-the-key-master/
+
+Objects created inside Anchor are only visible to the user that created them and that user's team, identified by the user's `teamId` field. This is achieved via Parse's roles functionality, where `teamId` is the role identifier.
+
+When you're ready to take this app into production, you should...
+* Disable the creation of new classes.
+* Disable the Add Fields permission on all classes, so users cannot create enew columns in the database.
+
+Read more about how to do these operations at http://blog.parse.com/learn/engineering/parse-security-ii-class-hysteria/

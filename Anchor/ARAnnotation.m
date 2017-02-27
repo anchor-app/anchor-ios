@@ -8,6 +8,8 @@
 
 #import "ARAnnotation.h"
 
+#import "ARUser.h"
+
 @interface ARAnnotation ()
 
 @property (nonatomic, strong) ARContact *contact;
@@ -23,6 +25,10 @@
 + (instancetype)annotationForContact:(ARContact *)contact withKey:(NSString *)key value:(NSString *)value
 {
   ARAnnotation *a = [ARAnnotation object];
+
+  ARUser *user = (ARUser *)[PFUser currentUser];
+  [user setPermissionsForObject:a];
+
   a.contact = contact;
   a.key = key;
   a.value = value;

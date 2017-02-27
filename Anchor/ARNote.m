@@ -9,6 +9,7 @@
 #import "ARNote.h"
 
 #import "ARContact.h"
+#import "ARUser.h"
 
 @interface ARNote ()
 
@@ -26,6 +27,10 @@
 + (instancetype)noteForContact:(ARContact *)contact withText:(NSString *)text date:(NSDate *)date
 {
   ARNote *note = [ARNote object];
+
+  ARUser *user = (ARUser *)[PFUser currentUser];
+  [user setPermissionsForObject:note];
+
   note.contact = contact;
   note.text = text;
   note.date = date;

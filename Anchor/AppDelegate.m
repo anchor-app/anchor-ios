@@ -46,6 +46,10 @@ NSString *ARParseServerKey = @"ARParseServer";
       configuration.server = server;
     }]];
 
+  // Every time we create an object, we should be setting up permissions, including team permissions, but
+  // just in case, let's set up a default ACL to be empty, no one can access anything.
+  [PFACL setDefaultACL:[PFACL ACL] withAccessForCurrentUser:YES];
+
   // Set up logging.
   [DDLog addLogger:[DDTTYLogger sharedInstance]];
   self.fileLogger = [[DDFileLogger alloc] init];
@@ -111,6 +115,15 @@ NSString *ARParseServerKey = @"ARParseServer";
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
   DDLogInfo(@"User logged in: %@", user);
+
+  // Make the user's data readable to their own team, in case that's not done already. Not writable though.
+  ARUser *aruser = (ARUser *)user;
+  PFACL *acl = [PFACL ACLWithUser:aruser];
+  if (aruser.teamId) {
+    [acl setReadAccess:YES forRoleWithName:aruser.teamId];
+  }
+  aruser.ACL = acl;
+  [aruser saveEventually];
   
   [logInController dismissViewControllerAnimated:YES completion:nil];
 }

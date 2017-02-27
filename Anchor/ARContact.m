@@ -8,6 +8,8 @@
 
 #import "ARContact.h"
 
+#import "ARUser.h"
+
 @interface ARContact ()
 
 @property (nonatomic, copy) NSString *fullName;
@@ -29,6 +31,10 @@
 + (instancetype)contactWithFullName:(NSString *)fullName emails:(NSArray<NSString *> *)emails
 {
   ARContact *c = [ARContact object];
+
+  ARUser *user = (ARUser *)[PFUser currentUser];
+  [user setPermissionsForObject:c];
+
   c.fullName = fullName;
   c.emails = emails;
   return c;
