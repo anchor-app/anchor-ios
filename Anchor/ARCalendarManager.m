@@ -66,17 +66,32 @@
 
 - (NSString *)_extractEmailFromParticipant:(EKParticipant *)participant
 {
+  // Try URL
   NSString *maybeEmail = participant.URL.resourceSpecifier;
   // Drop optional 'mailto:' text.
   NSString *prefix = @"mailto:";
   if ([maybeEmail hasPrefix:prefix]) {
     maybeEmail = [maybeEmail substringFromIndex:[prefix length]];
   }
-  if (![self _validateEmail:maybeEmail]) {
-    return nil;
-  } else {
+  if ([self _validateEmail:maybeEmail]) {
     return maybeEmail;
   }
+
+  // Try description
+  NSRange prefixRange = [participant.description rangeOfString:@"email = "];
+  if (prefixRange.location != NSNotFound) {
+    unsigned long startIndex = prefixRange.location + prefixRange.length;
+    NSString *newString = [participant.description substringFromIndex:startIndex];
+    NSRange endRange = [newString rangeOfString:@";"];
+    if (endRange.location != NSNotFound) {
+      newString = [newString substringToIndex:endRange.location];
+    }
+    if ([self _validateEmail:newString]) {
+      return newString;
+    }
+  }
+
+  return nil;
 }
 
 - (NSDictionary<NSString *, NSArray<NSString *> *> *)_eventEmailsIndex:(NSArray<EKEvent *> *)events
