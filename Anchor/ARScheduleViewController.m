@@ -19,8 +19,9 @@
 #import "ARDatePagingView.h"
 #import "ARSingleSectionDataSource.h"
 #import "AREventDataSource.h"
+#import "ARSearchViewController.h"
 
-@interface ARScheduleViewController () <UITableViewDelegate, UITableViewDataSource, ARDatePagingViewDelegate>
+@interface ARScheduleViewController () <UITableViewDelegate, UITableViewDataSource, ARDatePagingViewDelegate, ARSearchViewControllerDelegate>
 
 @property (nonatomic, strong) ARCalendarManager *calendarManager;
 @property (nonatomic, strong) UITableView *tableView;
@@ -28,6 +29,7 @@
 @property (nonatomic, strong) NSMutableArray *dataSources;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) UINavigationController *settingsController;
+@property (nonatomic, strong) UINavigationController *searchController;
 @property (nonatomic, strong) ARDatePagingView *datePagingView;
 @property (nonatomic, strong) UIView *loadingView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
@@ -91,6 +93,12 @@
   UIImage *settingsImage = [settingsIcon imageWithSize:CGSizeMake(25, 25)];
   UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:settingsImage style:UIBarButtonItemStylePlain target:self action:@selector(_handleSettings)];
   self.navigationItem.leftBarButtonItem = settingsButton;
+
+  FAKIonIcons *searchIcon = [FAKIonIcons iosSearchIconWithSize:25];
+  UIImage *searchImage = [searchIcon imageWithSize:CGSizeMake(25, 25)];
+  UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:searchImage style:UIBarButtonItemStylePlain target:self action:@selector(_handleSearch)];
+  self.navigationItem.rightBarButtonItem = searchButton;
+
 }
 
 - (void)_handleSettings
@@ -100,6 +108,23 @@
     _settingsController = [[UINavigationController alloc] initWithRootViewController:s];
   }
   [self presentViewController:_settingsController animated:YES completion:nil];
+}
+
+- (void)_handleSearch
+{
+  if (!_searchController) {
+    ARSearchViewController *s = [[ARSearchViewController alloc] init];
+    s.delegate = self;
+    _searchController = [[UINavigationController alloc] initWithRootViewController:s];
+
+    s.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(_handleSearchCancel)];
+  }
+  [self presentViewController:_searchController animated:YES completion:nil];
+}
+
+- (void)_handleSearchCancel
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -182,6 +207,20 @@
 
     [_tableView reloadData];
   }
+}
+
+- (void)searchViewController:(ARSearchViewController *)viewController didSelectContactId:(NSString *)contactId forViewModel:(ARSearchViewModel *)viewModel
+{
+  // Dismiss search controller.
+  [self dismissViewControllerAnimated:YES completion:nil];
+
+  PFQuery *query = [PFQuery queryWithClassName:@"Contact"];
+  [query getObjectInBackgroundWithId:contactId block:^(PFObject *contact, NSError *error) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:(ARContact *)contact date:_date];
+      [self.navigationController pushViewController:vc animated:YES];
+    });
+  }];
 }
 
 @end
