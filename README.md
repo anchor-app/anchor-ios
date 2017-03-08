@@ -14,6 +14,21 @@ PARSE_SERVER=<your server URL>
 
 Be sure to set up this file before attempting to build.
 
+### Local Parse Setup
+
+If you want to have your app hit a local Parse server, then set `PARSE_SERVER` and `PARSE_APPLICATION_ID` as you configured it on your Parse server. Put whatever you want for `PARSE_CLIENT_KEY`, it doesn't matter.
+
+You'll also need to tell iOS that it's ok for it to hit non-HTTPS endpoints. Open `Info.plist` and add this to the primary `<dict>`:
+```
+       <key>NSAppTransportSecurity</key>
+       <dict>
+               <key>NSAllowsArbitraryLoads</key>
+               <true/>
+       </dict>
+```
+
+Please don't commit this as it makes the app less secure.
+
 ## Usage
 
 ### Connecting to FullContact
