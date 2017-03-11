@@ -12,5 +12,6 @@
 
 @property (nonatomic, copy) NSString *fullName;
 @property (nonatomic, copy) NSString *photoURL;
+@property (nonatomic, strong) UITextField *textField;
 
 @end

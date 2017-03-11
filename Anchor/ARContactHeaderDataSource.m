@@ -38,11 +38,18 @@
   ARContactHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
   if (cell == nil) {
     cell = [[ARContactHeaderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    [cell.textField addTarget:self action:@selector(_onTextFieldChange:) forControlEvents:UIControlEventEditingChanged];
   }
   cell.fullName = self.contact.fullName;
   cell.photoURL = self.contact.photoURL;
+  cell.editing = self.isEditing;
 
   return cell;
+}
+
+- (void)_onTextFieldChange:(UITextField *)textField
+{
+  _contact.fullName = textField.text;
 }
 
 @end
