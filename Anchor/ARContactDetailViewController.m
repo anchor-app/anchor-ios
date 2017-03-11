@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSArray<ARSingleSectionDataSource *> *dataSources;
 
+@property (nonatomic, strong) ARContactHeaderDataSource *headerDataSource;
 @property (nonatomic, strong) ARKeyValueDataSource *notesDatasource;
 @property (nonatomic, strong) ARKeyValueDataSource *annotationsDataSource;
 
@@ -40,6 +41,13 @@
     self.contact = contact;
     self.date = date;
 
+    if ([self _isNewContact]) {
+      self.title = @"New Contact";
+
+      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(_endNewContact)];
+    } else {
+      self.title = @"Contact";
+    }
 
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     ARKeyManager *keyManager = appDelegate.keyManager;
@@ -94,13 +102,43 @@
       return nil;
     }];
 
+    _headerDataSource = [[ARContactHeaderDataSource alloc] initWithContact:self.contact];
+    _headerDataSource.editing = [self _isNewContact];
+
     self.dataSources = @[
-                         [[ARContactHeaderDataSource alloc] initWithContact:self.contact],
+                         _headerDataSource,
                          _notesDatasource,
                          _annotationsDataSource,
                          ];
   }
+
   return self;
+}
+
+- (BOOL)_isNewContact
+{
+  return _contact.createdAt == nil;
+}
+
+- (void)_endNewContact
+{
+  self.navigationItem.rightBarButtonItem = nil;
+  self.title = @"Contact";
+  _headerDataSource.editing = NO;
+
+  [[self.contact saveEventually] continueWithBlock:^id _Nullable(BFTask<NSNumber *> * _Nonnull t) {
+    if (t.error) {
+      DDLogError(@"Saving new contact failed: %@", t.error);
+    } else {
+      DDLogInfo(@"Saving new contact succeeded, contactId=%@", _contact.objectId);
+    }
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self.tableView reloadData];
+    });
+
+    return nil;
+  }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

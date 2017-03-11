@@ -209,18 +209,27 @@
   }
 }
 
-- (void)searchViewController:(ARSearchViewController *)viewController didSelectContactId:(NSString *)contactId forViewModel:(ARSearchViewModel *)viewModel
+- (void)searchViewController:(ARSearchViewController *)viewController didSelectViewModel:(ARSearchViewModel *)viewModel
 {
-  // Dismiss search controller.
+  // It's unclear what you really want to do here: do you want to push the result on the nav stack of hte search view, or
+  // dismiss the search view? For now, let's dismiss the search controller.
   [self dismissViewControllerAnimated:YES completion:nil];
 
-  PFQuery *query = [PFQuery queryWithClassName:@"Contact"];
-  [query getObjectInBackgroundWithId:contactId block:^(PFObject *contact, NSError *error) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:(ARContact *)contact date:_date];
-      [self.navigationController pushViewController:vc animated:YES];
-    });
-  }];
+  if (viewModel.type == ARSearchViewModelTypeNewContact) {
+    ARContact *c = [ARContact contactWithFullName:viewModel.name emails:@[]];
+    ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:c date:_date];
+    [self.navigationController pushViewController:vc animated:YES];
+  } else {
+    // TODO: this is slow. The Search Detail View Controller should be re-written to support fetching the contact and
+    // displaying a spinner.
+    PFQuery *query = [PFQuery queryWithClassName:@"Contact"];
+    [query getObjectInBackgroundWithId:viewModel.contactId block:^(PFObject *contact, NSError *error) {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        ARContactDetailViewController *vc = [[ARContactDetailViewController alloc] initWithContact:(ARContact *)contact date:_date];
+        [self.navigationController pushViewController:vc animated:YES];
+      });
+    }];
+  }
 }
 
 @end

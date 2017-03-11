@@ -16,4 +16,6 @@
 
 - (instancetype)initWithContact:(ARContact *)contact;
 
+@property (nonatomic, assign, getter=isEditing) BOOL editing;
+
 @end

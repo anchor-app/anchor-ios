@@ -139,7 +139,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   ARSearchViewModel *viewModel = (tableView == self.tableView) ? _viewModels[indexPath.row] : _resultsTableController.filteredViewModels[indexPath.row];
 
-  [_delegate searchViewController:self didSelectContactId:viewModel.contactId forViewModel:viewModel];
+  [_delegate searchViewController:self didSelectViewModel:viewModel];
 }
 
 
@@ -154,24 +154,31 @@
 
   if (strippedString.length > 0) {
     // Find the Contact objects by email and name using a cloud function.
-    [[PFCloud callFunctionInBackground:@"searchContacts" withParameters:@{@"q": strippedString}] continueWithSuccessBlock:^id _Nullable(BFTask<id> * _Nonnull t)
-     {
-       NSMutableArray<ARSearchViewModel *> *viewModels = [NSMutableArray array];
-       NSArray<NSDictionary *> *results = t.result;
+    [[PFCloud callFunctionInBackground:@"searchContacts" withParameters:@{@"q": strippedString}] continueWithBlock:^id _Nullable(BFTask<id> * _Nonnull t) {
 
-       [viewModels addObject:[[ARSearchViewModel alloc] initWithType:ARSearchViewModelTypeNewContact name:strippedString contactId:nil]];
-       for (NSDictionary *r in results) {
-         [viewModels addObject:[[ARSearchViewModel alloc] initWithType:ARSearchViewModelTypeContact name:r[@"fullName"] contactId:r[@"contactId"]]];
-       }
+      NSMutableArray<ARSearchViewModel *> *viewModels = [NSMutableArray array];
 
-       dispatch_async(dispatch_get_main_queue(), ^{
-         // hand over the filtered results to our search results table
-         ARSearchResultsViewController *tableController = (ARSearchResultsViewController *)self.searchController.searchResultsController;
-         tableController.filteredViewModels = viewModels;
-         [tableController.tableView reloadData];
-       });
-       return nil;
-     }];
+      // Even though there may be an error, still add a new contact option.
+      [viewModels addObject:[[ARSearchViewModel alloc] initWithType:ARSearchViewModelTypeNewContact name:strippedString contactId:nil]];
+
+      if (t.error) {
+        DDLogError(@"Error searching for '%@': %@", strippedString, t.error);
+      } else {
+        NSArray<NSDictionary *> *results = t.result;
+
+        for (NSDictionary *r in results) {
+          [viewModels addObject:[[ARSearchViewModel alloc] initWithType:ARSearchViewModelTypeContact name:r[@"fullName"] contactId:r[@"contactId"]]];
+        }
+      }
+
+      dispatch_async(dispatch_get_main_queue(), ^{
+        // hand over the filtered results to our search results table
+        ARSearchResultsViewController *tableController = (ARSearchResultsViewController *)self.searchController.searchResultsController;
+        tableController.filteredViewModels = viewModels;
+        [tableController.tableView reloadData];
+      });
+      return nil;
+    }];
   }
 }
 

@@ -16,7 +16,7 @@
 
 @protocol ARSearchViewControllerDelegate <NSObject>
 
-- (void)searchViewController:(ARSearchViewController *)viewController didSelectContactId:(NSString *)contactId forViewModel:(ARSearchViewModel *)viewModel;
+- (void)searchViewController:(ARSearchViewController *)viewController didSelectViewModel:(ARSearchViewModel *)viewModel;
 
 @end
 
