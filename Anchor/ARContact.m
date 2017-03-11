@@ -12,8 +12,6 @@
 
 @interface ARContact ()
 
-@property (nonatomic, copy) NSString *fullName;
-@property (nonatomic, copy) NSArray<NSString *> *emails;
 @property (nonatomic, copy) NSString *fullContactJSON;
 @property (nonatomic, copy) NSString *photoURL;
 
