@@ -15,8 +15,8 @@
 
 @interface ARContact : PFObject<PFSubclassing>
 
-@property (nonatomic, readonly, copy) NSString *fullName;
-@property (nonatomic, readonly, copy) NSArray<NSString *> *emails;
+@property (nonatomic, copy) NSString *fullName;
+@property (nonatomic, copy) NSArray<NSString *> *emails;
 @property (nonatomic, readonly, copy) NSString *fullContactJSON;
 @property (nonatomic, readonly, copy) NSString *photoURL;
 @property (nonatomic, readonly, strong) PFRelation *notes;
