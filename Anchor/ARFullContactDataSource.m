@@ -11,6 +11,7 @@
 #import <AFMInfoBanner/AFMInfoBanner.h>
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
+#import <Bolts/Bolts.h>
 
 #import "ARUser.h"
 #import "AppDelegate.h"
@@ -171,16 +172,19 @@ NSString *ARFullContactDataSourceTextFieldIdClientSecret = @"ARFullContactDataSo
   } else {
     // TODO: invert this dependency w/ some kind of provider map solution.
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.fullContact authenticateWithScope:@"contacts.read" completion:^(NSString *accessToken, NSString *refreshToken, NSError *error) {
-      if (error) {
-        DDLogError(@"Error authenticating with FullContact: %@", error);
+    [[appDelegate.fullContact authenticateWithScope:@"contacts.read,contacts.write" clientId:user.fullContactClientId clientSecret:user.fullContactClientSecret redirectUri:appDelegate.redirectUri] continueWithBlock:^id _Nullable(BFTask *_Nonnull t) {
+      if (t.error) {
+        DDLogError(@"Error authenticating with FullContact: %@", t.error);
         [AFMInfoBanner showAndHideWithText:@"Error authenticating with FullContact" style:AFMInfoBannerStyleError];
       } else {
-        user.fullContactAccessToken = accessToken;
-        user.fullContactResetToken = refreshToken;
+        NSDictionary *dict = (NSDictionary *)t.result;
+        user.fullContactAccessToken = dict[@"access_token"];
+        user.fullContactRefreshToken = dict[@"refresh_token"];
+        NSString *expirationSeconds = dict[@"access_token_expiration"];
+        user.fullContactAccessTokenExpirationDate = [NSDate dateWithTimeIntervalSinceNow:[expirationSeconds integerValue]];
         [user saveEventually];
 
-        DDLogInfo(@"Successfully acquired FullContact accessToken(%@) refreshToken(%@)", accessToken, refreshToken);
+        DDLogInfo(@"Successfully acquired FullContact accessToken(%@) accessTokenExpirationDate(%@) refreshToken(%@)", user.fullContactAccessToken, user.fullContactAccessTokenExpirationDate, user.fullContactRefreshToken);
         [AFMInfoBanner showAndHideWithText:@"Authenticated with FullContact" style:AFMInfoBannerStyleInfo];
 
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -188,6 +192,8 @@ NSString *ARFullContactDataSourceTextFieldIdClientSecret = @"ARFullContactDataSo
           [_delegate dataSourceDataChanged:self];
         });
       }
+
+      return nil;
     }];
   }
 }
@@ -209,8 +215,9 @@ NSString *ARFullContactDataSourceTextFieldIdClientSecret = @"ARFullContactDataSo
 {
   DDLogInfo(@"Logging out of FullContact...");
   ARUser *user = (ARUser *)[PFUser currentUser];
-  user.fullContactResetToken = nil;
+  user.fullContactRefreshToken = nil;
   user.fullContactAccessToken = nil;
+  user.fullContactAccessTokenExpirationDate = nil;
   user.fullContactClientId = nil;
   user.fullContactClientSecret = nil;
   [user saveEventually];

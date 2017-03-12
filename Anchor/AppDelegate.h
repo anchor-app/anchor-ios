@@ -24,5 +24,7 @@
  */
 @property (nonatomic, strong) ARFullContact *fullContact;
 
+@property (nonnull, readonly, copy) NSString *redirectUri;
+
 @end
 

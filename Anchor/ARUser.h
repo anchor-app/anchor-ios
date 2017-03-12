@@ -32,9 +32,14 @@
 @property (nonatomic, copy) NSString *fullContactAccessToken;
 
 /**
+ When the access token expires. See https://api.fullcontact.com/v3/docs/authentication/
+ */
+@property (nonatomic, copy) NSDate *fullContactAccessTokenExpirationDate;
+
+/**
  Token with which to request another valid access token, once the access token has expired. See https://api.fullcontact.com/v3/docs/authentication/
  */
-@property (nonatomic, copy) NSString *fullContactResetToken;
+@property (nonatomic, copy) NSString *fullContactRefreshToken;
 
 /**
  Optional Parse role name which represents all the users in a "team".
