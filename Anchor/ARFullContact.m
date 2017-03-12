@@ -9,53 +9,59 @@
 #import "ARFullContact.h"
 
 #import <AFNetworking.h>
+#import <Bolts/Bolts.h>
 #import "NSURL+QueryDictionary.h"
 
 @interface ARFullContact ()
 
 @property (nonatomic, copy) NSString *redirectURI;
 
-@property (nonatomic, strong) NSMutableDictionary<NSString *, ARFullContactAuthenticationCompletionBlock> *authenticationAttempts;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSDictionary *> *authenticationAttempts;
 
 @end
 
 @implementation ARFullContact
 
-- (instancetype)initWithClientId:(NSString *)clientId clientSecret:(NSString *)clientSecret redirectURI:(NSString *)redirectURI
+- (instancetype)init
 {
   if (self = [super init]) {
-    self.clientId = clientId;
-    self.clientSecret = clientSecret;
-    self.redirectURI = redirectURI;
-
     self.authenticationAttempts = [NSMutableDictionary dictionary];
-
-    // Make sure the user didnt provide us a URI with state= query string already :)
-    NSURL *url = [NSURL URLWithString:self.redirectURI];
-    NSDictionary *query = [url uq_queryDictionary];
-    NSAssert(query[@"state"] == nil, @"Do not provide a FullContact redirect string with a state parameter already set.");
   }
 
   return self;
 }
 
-- (void)authenticateWithScope:(NSString *)scope completion:(ARFullContactAuthenticationCompletionBlock)completion
+- (BFTask *)authenticateWithScope:(NSString *)scope clientId:(NSString *)clientId clientSecret:(NSString *)clientSecret redirectUri:(NSString *)redirectUri
 {
+  BFTaskCompletionSource *bfTask = [BFTaskCompletionSource taskCompletionSource];
+
+  // Make sure the user didnt provide us a URI with state= query string already :)
+  NSURL *redirectUrl = [NSURL URLWithString:redirectUri];
+  NSDictionary *query = [redirectUrl uq_queryDictionary];
+  NSAssert(query[@"state"] == nil, @"Do not provide a FullContact redirect string with a state parameter already set.");
+
   NSURL *url = [NSURL URLWithString:@"https://app.fullcontact.com/oauth/authorize"];
 
   NSString *state = [[NSProcessInfo processInfo] globallyUniqueString];
 
   url = [url uq_URLByAppendingQueryDictionary:@{
-                                                @"client_id": _clientId,
-                                                @"redirect_uri": _redirectURI,
+                                                @"client_id": clientId,
+                                                @"redirect_uri": redirectUri,
                                                 @"response_type": @"code",
                                                 @"scope": scope,
                                                 @"state": state,
                                                 }];
   DDLogInfo(@"Authenticating with FullContact, starting with URL %@", url);
 
-  _authenticationAttempts[state] = completion;
+  _authenticationAttempts[state] = @{
+                                     @"task": bfTask,
+                                     @"clientId": clientId,
+                                     @"clientSecret": clientSecret,
+                                     @"redirectUri": redirectUri,
+                                     };
   [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+
+  return bfTask.task;
 }
 
 - (void)handleAuthenticationCallback:(NSURL *)url
@@ -72,11 +78,15 @@
     DDLogError(@"Couldn't find a valid authentication attempt to match URL %@. Cannot proceed with FullContact authentication request.", url);
     return;
   }
-  ARFullContactAuthenticationCompletionBlock block = _authenticationAttempts[state];
+  NSDictionary *config = _authenticationAttempts[state];
+  BFTaskCompletionSource *bfTask = config[@"task"];
+  NSString *clientId = config[@"clientId"];
+  NSString *clientSecret = config[@"clientSecret"];
+  NSString *redirectUri = config[@"redirectUri"];
 
   if (!code) {
     NSString *desc = [NSString stringWithFormat:@"FullContact redirect URL %@ did not contain the necessary 'code' parameter. Cannot complete authenticaion request.", url];
-    block(nil, nil, [NSError errorWithDomain:@"com.rdhjr.anchor" code:500 userInfo:@{ NSLocalizedDescriptionKey: desc }]);
+    [bfTask setError:[NSError errorWithDomain:@"com.rdhjr.anchor" code:500 userInfo:@{ NSLocalizedDescriptionKey: desc }]];
     return;
   }
 
@@ -86,24 +96,21 @@
 
   NSDictionary *parameters = @{
                                @"code": code,
-                               @"client_id": _clientId,
-                               @"client_secret": _clientSecret,
-                               @"redirect_uri": _redirectURI,
+                               @"client_id": clientId,
+                               @"client_secret": clientSecret,
+                               @"redirect_uri": redirectUri,
                                };
 
   [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
   [manager POST:@"https://api.fullcontact.com/v3/oauth.exchangeAuthCode" parameters:parameters progress:nil success:^(NSURLSessionTask *task, id responseObject) {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
-      NSDictionary *dict = (NSDictionary *)responseObject;
-      NSString *accessToken = dict[@"access_token"];
-      NSString *refreshToken = dict[@"refresh_token"];
-      block(accessToken, refreshToken, nil);
+      [bfTask setResult:responseObject];
     } else {
       NSString *desc = [NSString stringWithFormat:@"FullContact returned a strange object on authentication: %@", responseObject];
-      block(nil, nil, [NSError errorWithDomain:@"com.rdhjr.anchor" code:500 userInfo:@{ NSLocalizedDescriptionKey: desc }]);
+      [bfTask setError:[NSError errorWithDomain:@"com.rdhjr.anchor" code:500 userInfo:@{ NSLocalizedDescriptionKey: desc }]];
     }
   } failure:^(NSURLSessionTask *operation, NSError *error) {
-    block(nil, nil, error);
+    [bfTask setError:error];
   }];
 }
 
@@ -112,6 +119,62 @@
   NSURL *url = [NSURL URLWithString:_redirectURI];
   url = [url uq_URLByAppendingQueryDictionary:@{ @"state": state }];
   return [url absoluteString];
+}
+
+- (BFTask *)refreshAccessTokenUsingRefreshToken:(NSString *)refreshToken clientId:(NSString *)clientId clientSecret:(NSString *)clientSecret
+{
+  BFTaskCompletionSource *bfTask = [BFTaskCompletionSource taskCompletionSource];
+  AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+
+  NSDictionary *parameters = @{
+                               @"client_id": clientId,
+                               @"client_secret": clientSecret,
+                               @"refresh_token": refreshToken,
+                               };
+
+  [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+  [manager POST:@"https://api.fullcontact.com/v3/oauth.refreshToken" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSDictionary *dict = (NSDictionary *)responseObject;
+    DDLogInfo(@"Successefully refreshed access token: %@", dict);
+
+    [bfTask setResult:dict];
+  } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    DDLogError(@"Error refreshing access token refreshToken=%@: %@", refreshToken, error);
+    [bfTask setError:error];
+  }];
+
+  return bfTask.task;
+}
+
+- (BFTask *)addNewContactWithFullName:(NSString *)fullName accessToken:(NSString *)token
+{
+  BFTaskCompletionSource *bfTask = [BFTaskCompletionSource taskCompletionSource];
+  AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+  manager.requestSerializer = [AFJSONRequestSerializer serializer];
+
+  NSDictionary *parameters = @{
+                               @"contact": @{
+                                   @"contactData": @{
+                                       @"name": @{
+                                           @"givenName": fullName
+                                           },
+                                       },
+                                   },
+                               };
+
+  [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token]  forHTTPHeaderField:@"Authorization"];
+  [manager POST:@"https://api.fullcontact.com/v3/contacts.create" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    DDLogInfo(@"Created new FullContact contact name=%@", fullName);
+    NSDictionary *dict = (NSDictionary *)responseObject;
+
+    [bfTask setResult:dict[@"contact"]];
+  } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    DDLogError(@"Error creating new FullContact contact name=%@: %@", fullName, error);
+    [bfTask setError:error];
+  }];
+
+  return bfTask.task;
 }
 
 @end

@@ -32,6 +32,8 @@ NSString *ARParseServerKey = @"ARParseServer";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  _redirectUri = @"anchor-fullcontact://redirect";
+
   NSString *applicationId = AR_PARSE_APPLICATION_ID;
   NSString *clientKey = AR_PARSE_CLIENT_KEY;
   NSString *server = AR_PARSE_SERVER;
@@ -130,17 +132,9 @@ NSString *ARParseServerKey = @"ARParseServer";
 
 - (ARFullContact *)fullContact
 {
-  ARUser *user = (ARUser *)[PFUser currentUser];
   if (!_fullContact) {
-    if (user.fullContactClientId && user.fullContactClientSecret) {
-      self.fullContact = [[ARFullContact alloc] initWithClientId:user.fullContactClientId
-                                                    clientSecret:user.fullContactClientSecret
-                                                     redirectURI:@"anchor-fullcontact://redirect"];
-    }
+    self.fullContact = [[ARFullContact alloc] init];
   }
-  // Be safe and update the clientID and clientSecret in case they changed.
-  _fullContact.clientId = user.fullContactClientId;
-  _fullContact.clientSecret = user.fullContactClientSecret;
   return _fullContact;
 }
 

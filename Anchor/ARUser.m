@@ -12,8 +12,9 @@
 
 @dynamic fullContactClientId;
 @dynamic fullContactClientSecret;
-@dynamic fullContactResetToken;
+@dynamic fullContactRefreshToken;
 @dynamic fullContactAccessToken;
+@dynamic fullContactAccessTokenExpirationDate;
 @dynamic teamId;
 
 + (void)load

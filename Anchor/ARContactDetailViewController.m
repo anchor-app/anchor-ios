@@ -9,6 +9,7 @@
 #import "ARContactDetailViewController.h"
 
 #import <FontAwesomeKit/FontAwesomeKit.h>
+#import <Bolts/Bolts.h>
 
 #import "ARContactHeaderDataSource.h"
 #import "ARKeyValueDataSource.h"
@@ -20,6 +21,8 @@
 #import "ARAnnotationViewModel.h"
 #import "ARKeyManager.h"
 #import "AppDelegate.h"
+#import "ARFullContact.h"
+#import "ARUser.h"
 
 @interface ARContactDetailViewController () <ARDataSourceDelegate>
 
@@ -120,11 +123,48 @@
   return _contact.createdAt == nil;
 }
 
+- (BFTask *)_refreshFullContactTokenIfNeeded
+{
+  BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
+
+  ARUser *user = (ARUser *)[PFUser currentUser];
+  AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+  if ([user.fullContactAccessTokenExpirationDate timeIntervalSinceDate:[NSDate date]] < 60*60) { // less than 1hr
+    [[appDelegate.fullContact refreshAccessTokenUsingRefreshToken:user.fullContactRefreshToken clientId:user.fullContactClientId clientSecret:user.fullContactClientSecret] continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {
+      if (t.error) {
+        [task setError:t.error];
+      } else {
+        // Since we've updated the access token, we need to store that.
+        // TODO: We probably shouldnt be updated the tokens from this class. We should probably create a separate ARFullContactAccessManagement class or something to pair with the ARFullContact API class.
+        NSDictionary *response = t.result;
+        user.fullContactAccessToken = response[@"access_token"];
+        NSString *expirationSeconds = response[@"refresh_token_expiration"];
+        user.fullContactAccessTokenExpirationDate = [NSDate dateWithTimeIntervalSinceNow:expirationSeconds.integerValue]; // approximation, easier than parsing dates :)
+        [user saveEventually];
+
+        [task setResult:nil];
+      }
+      return nil;
+    }];
+  } else {
+    [task setResult:nil];
+  }
+  return task.task;
+}
+
 - (void)_endNewContact
 {
   self.navigationItem.rightBarButtonItem = nil;
   self.title = @"Contact";
   _headerDataSource.editing = NO;
+
+  // Create a new FullContact contact and an ARContact object.
+  ARUser *user = (ARUser *)[PFUser currentUser];
+  AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
+  [[self _refreshFullContactTokenIfNeeded] continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
+    return [appDelegate.fullContact addNewContactWithFullName:_contact.fullName accessToken:user.fullContactAccessToken];
+  }];
 
   [[self.contact saveEventually] continueWithBlock:^id _Nullable(BFTask<NSNumber *> * _Nonnull t) {
     if (t.error) {
