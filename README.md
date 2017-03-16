@@ -135,3 +135,21 @@ When you're ready to take this app into production, you should...
 * Disable the Add Fields permission on all classes, so users cannot create enew columns in the database.
 
 Read more about how to do these operations at http://blog.parse.com/learn/engineering/parse-security-ii-class-hysteria/
+
+## Deployment
+Right now we are using my individual Apple account. Learn more about different Apple Developer accounts at https://developer.apple.com/support/compare-memberships/ Because it's an individual account, it does not allow a set of other Apple accounts to be team members, which means all TestFlight testers have to be "External Testers" in the tool and that builds must go through the Beta Review process before being pushed to dogfooders.
+
+Not sure how much of an issue this will be. Solving this w/ an organiation account requires getting a DUNS number for the organization, which takes weeks (although there might be an easier way: https://blog.metamorphium.com/2012/12/03/apple-duns/). Might be worth it though since you don't have to wait on the review process.
+
+Anyway, to make a new dogfooding build:
+
+1. In Xcode, where you select which device/simulator to build for select "Generic iOS Device."
+2. You probably need to bump the Build Number or version number in the Info.plist, since this is how Apple differentiates the binaries. We should probably build a script for this.
+2. Product -> Archive to kick off a build.
+3. Once it's done building, it will open the Organizer and show you the latest build.
+4. Click Upload to App Store.
+5. Go to https://itunesconnect.apple.com, navigate to the App.
+6. Select the TestFlight tab then External Testing.
+7. Click Add Build to Test and it should display the builds, but only after they are processed by Apple. This usually takes only a few minutes.
+8. Go through the flow to submit the build to review. Submit the appstorereview user and password.
+9. Come back when the build has been approved and click "Start Testing".
